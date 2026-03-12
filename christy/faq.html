@@ -39,18 +39,8 @@
     z-index: 100;
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
   }
-  .nav-brand {
-    font-family: 'DM Serif Display', serif;
-    font-size: 17px;
-    color: white;
-    text-decoration: none;
-    letter-spacing: -0.2px;
-  }
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+  .nav-brand { font-family: 'DM Serif Display', serif; font-size: 17px; color: white; text-decoration: none; letter-spacing: -0.2px; }
+  .nav-links { display: flex; align-items: center; gap: 6px; }
   .nav-links a {
     font-size: 12.5px;
     color: rgba(255,255,255,0.6);
@@ -61,19 +51,81 @@
     transition: all 0.18s ease;
     font-weight: 400;
   }
-  .nav-links a:hover {
-    color: white;
-    background: rgba(255,255,255,0.08);
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
+  .nav-links a.active { color: var(--gold); font-weight: 500; }
+  .nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.15); margin: 0 4px; }
+
+  /* HAMBURGER */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    padding: 4px;
+    border: none;
+    background: none;
   }
-  .nav-links a.active {
-    color: var(--gold);
-    font-weight: 500;
+  .nav-hamburger span {
+    display: block;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.25s ease;
   }
-  .nav-links .nav-divider {
-    width: 1px;
-    height: 16px;
-    background: rgba(255,255,255,0.15);
-    margin: 0 4px;
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* MOBILE DRAWER */
+  .nav-drawer {
+    position: fixed;
+    top: 58px;
+    right: 0;
+    width: 260px;
+    height: calc(100vh - 58px);
+    background: var(--accent);
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 28px;
+    gap: 6px;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -4px 0 24px rgba(0,0,0,0.2);
+  }
+  .nav-drawer.open { transform: translateX(0); }
+  .nav-drawer a {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    transition: all 0.18s ease;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-drawer a:last-child { border-bottom: none; }
+  .nav-drawer a:hover { color: white; background: rgba(255,255,255,0.08); }
+  .nav-drawer a.active { color: var(--gold); font-weight: 500; }
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 98;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .nav-overlay.open { opacity: 1; pointer-events: all; }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex !important; }
+    nav { padding: 0 20px; }
   }
 
   /* PAGE */
@@ -311,7 +363,18 @@
     <a href="services/pipedrive.html">Pipedrive</a>
     <a href="faq.html" class="active">FAQ</a>
   </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html">Proposal</a>
+  <a href="services/retellai.html">Retell AI</a>
+  <a href="services/calcom.html">Cal.com</a>
+  <a href="services/pipedrive.html">Pipedrive</a>
+  <a href="faq.html" class="active">FAQ</a>
+</div>
 
 <div class="page">
 
@@ -554,5 +617,24 @@
   // open first item by default
   document.querySelector('.faq-item').classList.add('open');
 </script>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const drawer = document.getElementById('navDrawer');
+  const overlay = document.getElementById('navOverlay');
+  function toggleNav() {
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+  hamburger.addEventListener('click', toggleNav);
+  overlay.addEventListener('click', toggleNav);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+  }));
+</script>
+
 </body>
 </html>
