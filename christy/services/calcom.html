@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cal.com — NuvelloWeb LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #faf8f4;
+    --accent: #1a3a2a;
+    --gold: #c9a84c;
+    --muted: #6b6b6b;
+    --border: #e2ddd6;
+    --highlight: #f0ece4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--accent);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .nav-brand { font-family: 'DM Serif Display', serif; font-size: 17px; color: white; text-decoration: none; letter-spacing: -0.2px; }
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-links a {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    transition: all 0.18s ease;
+    font-weight: 400;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
+  .nav-links a.active { color: var(--gold); font-weight: 500; }
+  .nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.15); margin: 0 4px; }
+
+  /* PAGE */
+  .page { max-width: 780px; margin: 0 auto; padding: 60px 40px 80px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .anim { animation: fadeUp 0.6s ease both; opacity: 0; }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.15s; }
+  .d3 { animation-delay: 0.25s; }
+  .d4 { animation-delay: 0.33s; }
+  .d5 { animation-delay: 0.40s; }
+  .d6 { animation-delay: 0.47s; }
+
+  /* BACK LINK */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 48px;
+    transition: color 0.18s;
+  }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: '←'; font-size: 14px; }
+
+  /* HERO */
+  .hero { margin-bottom: 52px; }
+  .page-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: 40px; line-height: 1.15; letter-spacing: -1px; color: var(--accent); margin-bottom: 16px; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-intro { font-size: 15px; color: var(--muted); max-width: 560px; line-height: 1.75; border-left: 3px solid var(--gold); padding-left: 18px; }
+
+  /* SECTION LABEL */
+  .section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 20px; }
+
+  /* EXPLAINER */
+  .explainer { background: var(--highlight); border: 1px solid var(--border); border-radius: 4px; padding: 32px 36px; margin-bottom: 48px; }
+  .explainer p { font-size: 14.5px; color: #3a3a3a; line-height: 1.85; }
+  .explainer p + p { margin-top: 14px; }
+  .explainer strong { color: var(--accent); font-weight: 500; }
+
+  /* CALENDLY COMPARISON */
+  .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px; }
+  .comp-card { border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+  .comp-header { padding: 14px 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+  .comp-card.calendly .comp-header { background: #f5f0ea; color: #9a8060; }
+  .comp-card.calcom .comp-header { background: var(--accent); color: rgba(255,255,255,0.7); }
+  .comp-body { padding: 18px 20px; background: white; }
+  .comp-body ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .comp-body ul li { font-size: 13.5px; color: #3a3a3a; padding-left: 20px; position: relative; line-height: 1.55; }
+  .comp-card.calendly .comp-body ul li::before { content: '✗'; position: absolute; left: 0; color: #c97a7a; font-size: 13px; }
+  .comp-card.calcom .comp-body ul li::before { content: '✓'; position: absolute; left: 0; color: #1a6b3a; font-size: 13px; }
+
+  /* BOOKING FLOW */
+  .flow { margin-bottom: 48px; }
+  .flow-steps { display: flex; flex-direction: column; gap: 0; }
+  .flow-step {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    position: relative;
+  }
+  .flow-step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+    flex-shrink: 0;
+  }
+  .flow-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .flow-line {
+    width: 2px;
+    background: var(--border);
+    flex: 1;
+    margin: 4px 0;
+  }
+  .flow-step:last-child .flow-line { display: none; }
+  .flow-content {
+    padding: 4px 0 32px 16px;
+    flex: 1;
+  }
+  .flow-step:last-child .flow-content { padding-bottom: 0; }
+  .flow-content h4 { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--accent); margin-bottom: 6px; }
+  .flow-content p { font-size: 14px; color: #3a3a3a; line-height: 1.75; }
+  .flow-content p strong { color: var(--accent); font-weight: 500; }
+
+  /* FEATURE LIST */
+  .features { margin-bottom: 48px; }
+  .feature-item { display: flex; gap: 20px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .feature-item:first-of-type { border-top: 1px solid var(--border); }
+  .feature-icon { width: 40px; height: 40px; border-radius: 4px; background: var(--highlight); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .feature-content h4 { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--accent); margin-bottom: 5px; }
+  .feature-content p { font-size: 14px; color: #3a3a3a; line-height: 1.75; }
+  .feature-content p strong { color: var(--accent); font-weight: 500; }
+
+  /* COMPARISON CHART */
+  .chart-table { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .chart-header-row { display: grid; grid-template-columns: 1fr 160px 160px; background: var(--accent); }
+  .chart-col-feature { padding: 14px 20px; }
+  .chart-col-tool { padding: 14px 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; text-align: center; }
+  .calendly-col { color: rgba(255,255,255,0.45); border-left: 1px solid rgba(255,255,255,0.1); }
+  .calcom-col { color: var(--gold); border-left: 1px solid rgba(255,255,255,0.1); }
+  .chart-row { display: grid; grid-template-columns: 1fr 160px 160px; border-top: 1px solid var(--border); }
+  .chart-row:hover { background: var(--highlight); }
+  .chart-feature { padding: 16px 20px; display: flex; flex-direction: column; gap: 3px; }
+  .feature-name { font-size: 13.5px; color: var(--accent); font-weight: 500; }
+  .feature-desc { font-size: 12px; color: var(--muted); line-height: 1.45; }
+  .chart-cell { padding: 16px 20px; display: flex; align-items: center; justify-content: center; text-align: center; border-left: 1px solid var(--border); }
+  .highlight-cell { background: #f0f7f3; }
+  .cell-yes { font-size: 12.5px; color: #1a6b3a; font-weight: 500; }
+  .cell-no { font-size: 12px; color: #9a6060; }
+
+  /* OBJECTIONS */
+  .objections { display: flex; flex-direction: column; gap: 0; }
+  .objection-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
+  .objection-item:first-child { border-top: 1px solid var(--border); }
+  .objection-q { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--accent); margin-bottom: 12px; padding-left: 20px; position: relative; }
+  .objection-q::before { content: '"'; position: absolute; left: 0; color: var(--gold); font-size: 20px; top: -2px; }
+  .objection-a p { font-size: 14px; color: #3a3a3a; line-height: 1.8; }
+  .objection-a strong { color: var(--accent); font-weight: 500; }
+
+  /* FREE BADGE BLOCK */
+  .free-block {
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .free-block-header {
+    background: var(--accent);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .free-block-header span { font-family: 'DM Serif Display', serif; font-size: 18px; color: white; }
+  .free-badge {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: rgba(201,168,76,0.2);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .free-block-body { padding: 22px 24px; background: white; font-size: 14px; color: #3a3a3a; line-height: 1.8; }
+  .free-block-body strong { color: var(--accent); font-weight: 500; }
+  .free-block-body p + p { margin-top: 10px; }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--muted); }
+  .footer strong { color: var(--accent); font-weight: 500; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .nav-links a { padding: 6px 10px; font-size: 11.5px; }
+    .page { padding: 40px 20px 60px; }
+    .hero h1 { font-size: 30px; }
+    .comparison { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-brand">NuvelloWeb LLC</a>
+  <div class="nav-links">
+    <a href="../index.html">Proposal</a>
+    <div class="nav-divider"></div>
+    <a href="retellai.html">Retell AI</a>
+    <a href="calcom.html" class="active">Cal.com</a>
+    <a href="pipedrive.html">Pipedrive</a>
+    <a href="../faq.index">FAQ</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <a href="../index.html" class="back-link anim d1">Back to Proposal</a>
+
+  <!-- HERO -->
+  <div class="hero anim d1">
+    <div class="page-label">Learn More · Cal.com</div>
+    <h1>Appointments Booked.<br><em>While You Sleep.</em></h1>
+    <p class="hero-intro">Cal.com is the scheduling tool that connects directly to your AI caller. When a lead says yes, it's on your calendar instantly — no back-and-forth, no phone tag, no missed opportunities.</p>
+  </div>
+
+  <!-- WHAT IS IT -->
+  <div class="explainer anim d2">
+    <div class="section-label">What Is Cal.com?</div>
+    <p>Cal.com is a <strong>free, modern scheduling platform</strong> that lets people book time with you automatically — based on your real availability. You set your hours, connect your calendar, and Cal.com handles the rest.</p>
+    <p>On its own, it works like a smarter version of a booking link — leads pick a time that works for both of you and it lands on your calendar automatically. But what makes it special for your setup is <strong>how tightly it connects with Retell AI.</strong></p>
+    <p>When your AI caller is on the phone with a lead and they say they want to meet, Cal.com checks your live availability right then and there — and books the appointment <strong>before the call even ends.</strong> No follow-up needed. No scheduling back-and-forth. It just happens.</p>
+  </div>
+
+  <!-- CALENDLY COMPARISON -->
+  <div class="anim d2">
+    <div class="section-label">Why Cal.com Instead of Calendly?</div>
+    <div class="comparison">
+      <div class="comp-card calendly">
+        <div class="comp-header">Calendly</div>
+        <div class="comp-body">
+          <ul>
+            <li>Requires paid third-party middleware to connect with Retell AI</li>
+            <li>More complex setup — extra tools, extra cost, more moving parts</li>
+            <li>API limitations make real-time booking during a call unreliable</li>
+            <li>Additional monthly subscription on top of everything else</li>
+          </ul>
+        </div>
+      </div>
+      <div class="comp-card calcom">
+        <div class="comp-header">Cal.com</div>
+        <div class="comp-body">
+          <ul>
+            <li>Connects natively and directly with Retell AI — no middleware needed</li>
+            <li>Simple, clean setup — fewer moving parts means fewer things to break</li>
+            <li>Books appointments in real time during a live AI call</li>
+            <li>Completely free — zero monthly cost to you</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON CHART -->
+  <div class="anim d3" style="margin-bottom: 48px;">
+    <div class="section-label">Feature-by-Feature Breakdown</div>
+    <div class="chart-table">
+      <div class="chart-header-row">
+        <div class="chart-col-feature"></div>
+        <div class="chart-col-tool calendly-col">Calendly</div>
+        <div class="chart-col-tool calcom-col">Cal.com</div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-feature"><span class="feature-name">Retell AI Integration</span><span class="feature-desc">Books appointments directly during a live AI call</span></div>
+        <div class="chart-cell"><span class="cell-no">Requires paid middleware</span></div>
+        <div class="chart-cell highlight-cell"><span class="cell-yes">✓ Native, built-in</span></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-feature"><span class="feature-name">Monthly Cost</span><span class="feature-desc">What you pay just to use the platform</span></div>
+        <div class="chart-cell"><span class="cell-no">$10–$16/mo minimum</span></div>
+        <div class="chart-cell highlight-cell"><span class="cell-yes">✓ Free forever</span></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-feature"><span class="feature-name">Real-Time Booking During a Call</span><span class="feature-desc">AI books the slot while still on the phone with the lead</span></div>
+        <div class="chart-cell"><span class="cell-no">Unreliable — API limitations</span></div>
+        <div class="chart-cell highlight-cell"><span class="cell-yes">✓ Fully supported</span></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-feature"><span class="feature-name">Calendar Sync</span><span class="feature-desc">Reads your existing calendar to avoid double-booking</span></div>
+        <div class="chart-cell"><span class="cell-yes">✓ Yes</span></div>
+        <div class="chart-cell highlight-cell"><span class="cell-yes">✓ Yes</span></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-feature"><span class="feature-name">Automatic Reminders</span><span class="feature-desc">Sends confirmation and reminder emails to leads</span></div>
+        <div class="chart-cell"><span class="cell-yes">✓ Yes</span></div>
+        <div class="chart-cell highlight-cell"><span class="cell-yes">✓ Yes</span></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-feature"><span class="feature-name">Setup Complexity</span><span class="feature-desc">How many tools and steps are required to connect everything</span></div>
+        <div class="chart-cell"><span class="cell-no">High — needs Make.com or Zapier</span></div>
+        <div class="chart-cell highlight-cell"><span class="cell-yes">✓ Low — direct connection</span></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-feature"><span class="feature-name">Extra Monthly Tools Needed</span><span class="feature-desc">Third-party services required to make it work with Retell</span></div>
+        <div class="chart-cell"><span class="cell-no">Yes — Make.com (~$9–16/mo)</span></div>
+        <div class="chart-cell highlight-cell"><span class="cell-yes">✓ None</span></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-feature"><span class="feature-name">Points of Failure</span><span class="feature-desc">How many things can break in the booking chain</span></div>
+        <div class="chart-cell"><span class="cell-no">3+ (Calendly + middleware + Retell)</span></div>
+        <div class="chart-cell highlight-cell"><span class="cell-yes">✓ 1 (Cal.com + Retell only)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OBJECTION HANDLING -->
+  <div class="anim d3" style="margin-bottom: 48px;">
+    <div class="section-label">Common Questions About Switching</div>
+    <div class="objections">
+
+      <div class="objection-item">
+        <div class="objection-q">"I already know how to use Calendly. Why change?"</div>
+        <div class="objection-a"><p>That's a fair point — and if you were only using it for manual scheduling, Calendly would be fine. But your system is built around an AI caller that books appointments automatically during live calls. <strong>Calendly wasn't designed for that.</strong> To make it work, you'd need to pay for and manage a separate automation tool in between — adding cost, complexity, and another thing that can break. Cal.com does the same job you're used to, plus connects directly to Retell AI at no extra cost. The switch is a one-time adjustment for a permanently simpler, cheaper setup.</p></div>
+      </div>
+
+      <div class="objection-item">
+        <div class="objection-q">"Is Cal.com actually as good as Calendly? It sounds too simple."</div>
+        <div class="objection-a"><p>Cal.com is used by hundreds of thousands of businesses globally and is one of the fastest-growing scheduling platforms available. <strong>It does everything Calendly does</strong> — calendar sync, custom availability, reminders, multiple appointment types — and in some areas it's actually more flexible. The reason it's free isn't because it's limited. It's because the business model is different. For a solo agent like you, it covers everything you need and more.</p></div>
+      </div>
+
+      <div class="objection-item">
+        <div class="objection-q">"What if Cal.com goes away or changes its pricing?"</div>
+        <div class="objection-a"><p>Cal.com is open-source and backed by significant venture funding — it's not going anywhere. And even if their pricing model ever changed, <strong>the individual free tier is a core part of their product strategy.</strong> If anything ever shifted, Benjamin would flag it during your monthly retainer and we'd adapt the setup together. You're never left managing this alone.</p></div>
+      </div>
+
+      <div class="objection-item">
+        <div class="objection-q">"Will it be confusing to learn a new tool?"</div>
+        <div class="objection-a"><p>Honestly, Cal.com is one of the simplest tools in your entire setup. <strong>Your day-to-day interaction with it is minimal</strong> — you set your availability once, connect your calendar, and from there it just runs in the background. The AI handles the booking. You just show up for the appointments. We'll walk through it together during your Week 1 onboarding session, and it'll be in your quick-reference cheat sheet.</p></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOOKING FLOW -->
+  <div class="flow anim d3">
+    <div class="section-label">How the Booking Flow Works</div>
+    <div class="flow-steps">
+
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-dot">1</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <h4>Your AI calls the lead</h4>
+          <p>Retell AI dials from your lead list, introduces itself, and begins the conversation using your custom script.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-dot">2</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <h4>The lead says they're interested</h4>
+          <p>When a lead expresses interest in learning more or setting up a meeting, the AI smoothly moves into scheduling mode.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-dot">3</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <h4>Cal.com checks your live availability</h4>
+          <p><strong>Right there during the call,</strong> the AI pulls your real-time availability from Cal.com — only showing times you're actually free. No double-booking, ever.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-dot">4</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <h4>The lead picks a time</h4>
+          <p>The AI offers available slots and the lead confirms one — all through natural conversation, not a form or a link.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-dot">5</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <h4>Appointment confirmed — automatically</h4>
+          <p>Cal.com books the slot instantly. <strong>The lead gets a confirmation email. You get a calendar notification.</strong> The call ends. Done — before you've lifted a finger.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-dot">6</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <h4>Reminders go out automatically</h4>
+          <p>Cal.com sends the lead a reminder before the appointment — <strong>reducing no-shows without you having to do anything.</strong> You just show up at the right time.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features anim d4">
+    <div class="section-label">What Cal.com Does For You</div>
+
+    <div class="feature-item">
+      <div class="feature-icon">📆</div>
+      <div class="feature-content">
+        <h4>Syncs With Your Existing Calendar</h4>
+        <p>Cal.com connects to Google Calendar, iCloud, or Outlook. <strong>It reads your existing schedule in real time</strong> — so if you have a personal appointment or an existing client meeting, those times are automatically blocked. You'll never get double-booked.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon">⏰</div>
+      <div class="feature-content">
+        <h4>You Set Your Own Hours</h4>
+        <p>You decide when you're available. Only want to take calls Monday through Friday, 10am to 4pm? Set it once and Cal.com enforces it automatically. <strong>No more leads trying to book you at 8pm on a Sunday.</strong></p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon">📩</div>
+      <div class="feature-content">
+        <h4>Automatic Confirmations & Reminders</h4>
+        <p>The moment an appointment is booked, Cal.com sends the lead a confirmation with all the details. Before the meeting, it sends a reminder. <strong>Fewer no-shows, more attended appointments</strong> — without you sending a single text.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon">🔗</div>
+      <div class="feature-content">
+        <h4>Built for Retell AI</h4>
+        <p>Unlike other scheduling tools, Cal.com was purpose-built with API flexibility that makes it the <strong>official native integration for Retell AI.</strong> That means a tighter connection, more reliable booking, and no extra tools sitting in between.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon">📱</div>
+      <div class="feature-content">
+        <h4>Works on Any Device</h4>
+        <p>Cal.com works on your phone, tablet, or computer. <strong>You can check your upcoming appointments, update your availability, or review booking history</strong> from anywhere — whether you're at home or between client meetings.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FREE BLOCK -->
+  <div class="free-block anim d5">
+    <div class="free-block-header">
+      <span>What Does Cal.com Cost?</span>
+      <span class="free-badge">100% Free</span>
+    </div>
+    <div class="free-block-body">
+      <p><strong>Cal.com is completely free for individual users.</strong> There is no monthly subscription, no per-booking fee, and no hidden costs. You create a free account and it's yours to use.</p>
+      <p>This is one of the reasons we chose Cal.com over Calendly for your setup — it does everything you need, integrates directly with Retell AI, and costs you nothing. The only investment is the setup time, which is included in your Retell AI setup fee.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer anim d6">
+    <div><strong>NuvelloWeb LLC</strong> · Benjamin Krikler</div>
+    <div>
+      <a href="mailto:benjamin@nuvelloweb.com">benjamin@nuvelloweb.com</a> ·
+      <a href="tel:+16465332243">+1 (646) 533-2243</a> ·
+      <a href="https://nuvelloweb.com" target="_blank">nuvelloweb.com</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
