@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — NuvelloWeb LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #faf8f4;
+    --accent: #1a3a2a;
+    --gold: #c9a84c;
+    --muted: #6b6b6b;
+    --border: #e2ddd6;
+    --highlight: #f0ece4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--accent);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .nav-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: white;
+    text-decoration: none;
+    letter-spacing: -0.2px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-links a {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    transition: all 0.18s ease;
+    font-weight: 400;
+  }
+  .nav-links a:hover {
+    color: white;
+    background: rgba(255,255,255,0.08);
+  }
+  .nav-links a.active {
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .nav-links .nav-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255,255,255,0.15);
+    margin: 0 4px;
+  }
+
+  /* PAGE */
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .anim { animation: fadeUp 0.6s ease both; opacity: 0; }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.15s; }
+  .d3 { animation-delay: 0.22s; }
+  .d4 { animation-delay: 0.28s; }
+
+  /* HERO */
+  .hero { margin-bottom: 52px; }
+  .page-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-intro {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 540px;
+    line-height: 1.75;
+    border-left: 3px solid var(--gold);
+    padding-left: 18px;
+  }
+
+  /* FAQ */
+  .faq-group { margin-bottom: 48px; }
+  .group-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .faq-item:first-of-type { border-top: 1px solid var(--border); }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+  }
+  .faq-question-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--accent);
+    line-height: 1.3;
+    flex: 1;
+  }
+  .faq-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1;
+  }
+  .faq-item.open .faq-icon {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    transform: rotate(45deg);
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.25s ease;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 600px;
+  }
+  .faq-answer-inner {
+    padding-bottom: 22px;
+    font-size: 14.5px;
+    color: #3a3a3a;
+    line-height: 1.8;
+  }
+  .faq-answer-inner p + p { margin-top: 12px; }
+  .faq-answer-inner strong { color: var(--accent); font-weight: 500; }
+  .faq-answer-inner ul {
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .faq-answer-inner ul li {
+    padding-left: 18px;
+    position: relative;
+    font-size: 14px;
+  }
+  .faq-answer-inner ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 12px;
+    top: 2px;
+  }
+
+  /* CTA */
+  .cta-box {
+    margin-top: 56px;
+    background: var(--accent);
+    border-radius: 6px;
+    padding: 40px 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+  }
+  .cta-text h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: white;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .cta-text p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.65;
+    max-width: 380px;
+  }
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .cta-btn-primary {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 12px 24px;
+    border-radius: 3px;
+    text-decoration: none;
+    text-align: center;
+    transition: opacity 0.18s ease;
+    white-space: nowrap;
+  }
+  .cta-btn-primary:hover { opacity: 0.88; }
+  .cta-btn-secondary {
+    display: inline-block;
+    color: rgba(255,255,255,0.65);
+    font-size: 12.5px;
+    text-align: center;
+    text-decoration: none;
+    transition: color 0.18s ease;
+  }
+  .cta-btn-secondary:hover { color: white; }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 60px;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .footer strong { color: var(--accent); font-weight: 500; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .nav-links a { padding: 6px 10px; font-size: 11.5px; }
+    .page { padding: 40px 20px 60px; }
+    .hero h1 { font-size: 30px; }
+    .cta-box { flex-direction: column; padding: 30px 24px; }
+    .cta-actions { width: 100%; }
+    .cta-btn-primary { width: 100%; }
+    .footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">NuvelloWeb LLC</a>
+  <div class="nav-links">
+    <a href="index.html">Proposal</a>
+    <div class="nav-divider"></div>
+    <a href="retell.html">Retell AI</a>
+    <a href="calcom.html">Cal.com</a>
+    <a href="pipedrive.html">Pipedrive</a>
+    <a href="faq.html" class="active">FAQ</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero anim d1">
+    <div class="page-label">Frequently Asked Questions</div>
+    <h1>You've Got Questions.<br><em>We've Got Answers.</em></h1>
+    <p class="hero-intro">No tech background needed. These are the most common things people wonder about — answered in plain English, the way we'd explain it over coffee.</p>
+  </div>
+
+  <!-- GROUP 1: THE AI CALLER -->
+  <div class="faq-group anim d2">
+    <div class="group-label">About the AI Caller</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">Will the AI sound robotic? Will people know it's not a real person?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p>This is the most common concern — and a fair one. The short answer is: <strong>no, it doesn't sound like the robots you're thinking of.</strong> Retell AI uses modern voice technology that sounds remarkably natural — it pauses, responds in context, and holds a real conversation.</p>
+          <p>That said, there are laws in some states requiring AI callers to disclose they're automated when asked. We'll make sure your setup is compliant. In practice, most people are surprised by how natural the interaction feels.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">What happens if a lead gets angry or hangs up?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p>The AI is designed to handle this gracefully. If someone is rude or asks to be removed, it will <strong>politely end the call and flag that lead in your system</strong> so they're not contacted again. It won't argue, get flustered, or say something you'd regret.</p>
+          <p>You'll be able to review all call recordings and transcripts inside Retell, so you always know exactly what was said.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">Can I hear what the AI sounds like before it calls my leads?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p><strong>Absolutely — and we won't go live until you're happy with it.</strong> Part of the setup process includes running test calls so you can hear exactly how the AI sounds and what it says. We'll make adjustments to the voice, tone, and script until it feels right to you.</p>
+          <p>Think of it like a dress rehearsal before opening night.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">What if a lead asks a question the AI doesn't know how to answer?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p>The AI is built around a specific script and set of responses. If a lead goes off-script with a very specific question — like detailed policy pricing — the AI is trained to <strong>acknowledge the question and offer to have you follow up personally</strong>, then book the appointment so you can answer it yourself.</p>
+          <p>It knows what it knows, and it handles the edges gracefully rather than making something up.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GROUP 2: APPOINTMENTS & SCHEDULING -->
+  <div class="faq-group anim d3">
+    <div class="group-label">Appointments & Scheduling</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">How does the appointment actually get on my calendar?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p>When a lead agrees to meet, the AI checks your real-time availability through Cal.com and books a slot on the spot — <strong>right there during the call.</strong> The lead gets a confirmation, you get a notification, and it shows up on your calendar automatically.</p>
+          <p>You don't have to do anything. By the time the call ends, the appointment is already set.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">What if I'm already busy at a time a lead wants to meet?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p>Cal.com syncs with your existing calendar — Google Calendar, iCloud, whatever you use. <strong>If you're already booked, that time won't be offered to leads.</strong> The AI will only book into open slots, so there's no risk of double-booking.</p>
+          <p>You set your available hours during setup and can update them anytime.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">Will leads get a reminder before the appointment?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p><strong>Yes — Cal.com sends automatic reminders</strong> to leads before their appointment, so they're less likely to no-show. You can customize when those reminders go out (for example, 24 hours before and 1 hour before).</p>
+          <p>This is one of those small things that makes a big difference in how many people actually show up.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GROUP 3: LEADS & PIPEDRIVE -->
+  <div class="faq-group anim d3">
+    <div class="group-label">Managing Leads & Your CRM</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">How do I add new leads into the system?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p>We'll set up a simple, repeatable process for this during Week 3 of your setup. Whether your leads come in from your upline as a spreadsheet, a list, or individually — <strong>we'll build a workflow that makes it as easy as possible to get them into Pipedrive</strong> and then into the AI dialer.</p>
+          <p>Part of your monthly tutoring sessions will cover this so it becomes second nature quickly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">What happens to a lead after the AI calls them?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p>Every call outcome gets logged in Pipedrive automatically. You'll be able to see:
+          <ul>
+            <li>Whether the call connected or went to voicemail</li>
+            <li>Whether an appointment was booked</li>
+            <li>A transcript of what was said</li>
+            <li>What follow-up action (if any) is needed</li>
+          </ul>
+          </p>
+          <p>Nothing falls through the cracks. Your pipeline always reflects exactly where every lead stands.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GROUP 4: WORKING WITH NUVELLOWEB -->
+  <div class="faq-group anim d4">
+    <div class="group-label">Working With NuvelloWeb</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">What if I need more than 5 hours in a month?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p>No problem — additional time beyond your included 5 hours is billed at <strong>$60/hour.</strong> We'll always let you know before going over so there are no surprise charges at the end of the month.</p>
+          <p>In practice, most clients find that 5 hours is plenty once the system is set up and running smoothly — the goal is to make you self-sufficient, not dependent.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">I'm not very tech-savvy. Is this going to be overwhelming?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p><strong>This is exactly what the tutoring hours are for.</strong> We're not going to set everything up and hand you a manual. We sit with you in person, walk through each tool together, and make sure you actually feel comfortable before we move on.</p>
+          <p>We'll also give you a simple one-page cheat sheet for daily use — so even on a day when you're not sure what to do next, you've got a quick reference right there.</p>
+          <p>You don't need to understand how the technology works under the hood. You just need to know how to use it — and that's what we're here for.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">What if something breaks or stops working?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p>That's what the retainer is for. <strong>You have a real person — Benjamin — who you can call, text, or email</strong> when something isn't working right. You're not submitting a support ticket to a faceless company. You're reaching out to someone who knows your setup personally and can fix it fast.</p>
+          <p>The goal is that you never feel stuck or on your own with this.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-question-text">How long until the system is actually up and running?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p><strong>Four weeks from the day you sign.</strong> Here's how it breaks down:
+          <ul>
+            <li>Week 1 — Accounts set up, first orientation session</li>
+            <li>Week 2 — AI caller built and scripted, connected to your calendar</li>
+            <li>Week 3 — Everything integrated and tested end-to-end</li>
+            <li>Week 4 — Final training, go live</li>
+          </ul>
+          </p>
+          <p>By the end of Week 4, your AI is making calls and booking appointments on your behalf.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div><strong>NuvelloWeb LLC</strong> · Benjamin Krikler</div>
+    <div>
+      <a href="mailto:benjamin@nuvelloweb.com">benjamin@nuvelloweb.com</a> ·
+      <a href="tel:+16465332243">+1 (646) 533-2243</a> ·
+      <a href="https://nuvelloweb.com" target="_blank">nuvelloweb.com</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function toggle(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    // open clicked if it wasn't open
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Open first item by default
+  document.querySelector('.faq-item .faq-question').click();
+</script>
+
+</body>
+</html>
