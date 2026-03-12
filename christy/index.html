@@ -24,380 +24,166 @@
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
-  .page {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 60px 40px 80px;
+
+  /* NAV */
+  nav {
+    background: var(--accent);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
   }
+  .nav-brand { font-family: 'DM Serif Display', serif; font-size: 17px; color: white; text-decoration: none; letter-spacing: -0.2px; }
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-links a {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    transition: all 0.18s ease;
+    font-weight: 400;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
+  .nav-links a.active { color: var(--gold); font-weight: 500; }
+  .nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.15); margin: 0 4px; }
+
+  /* PAGE */
+  .page { max-width: 780px; margin: 0 auto; padding: 60px 40px 100px; }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
   .anim { animation: fadeUp 0.6s ease both; opacity: 0; }
-  .d1 { animation-delay: 0.05s; }
-  .d2 { animation-delay: 0.15s; }
-  .d3 { animation-delay: 0.25s; }
-  .d4 { animation-delay: 0.32s; }
-  .d5 { animation-delay: 0.38s; }
-  .d6 { animation-delay: 0.44s; }
-  .d7 { animation-delay: 0.50s; }
-  .d8 { animation-delay: 0.56s; }
-  .d9 { animation-delay: 0.62s; }
-  .d10 { animation-delay: 0.68s; }
-  .d11 { animation-delay: 0.74s; }
+  .d1 { animation-delay: 0.05s; } .d2 { animation-delay: 0.12s; }
+  .d3 { animation-delay: 0.19s; } .d4 { animation-delay: 0.26s; }
+  .d5 { animation-delay: 0.33s; } .d6 { animation-delay: 0.40s; }
+  .d7 { animation-delay: 0.47s; } .d8 { animation-delay: 0.54s; }
+  .d9 { animation-delay: 0.61s; } .d10 { animation-delay: 0.68s; }
+  .d11 { animation-delay: 0.75s; } .d12 { animation-delay: 0.82s; }
+  .d13 { animation-delay: 0.89s; }
 
   /* HEADER */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 2px solid var(--ink);
-    padding-bottom: 28px;
-    margin-bottom: 48px;
-  }
-  .brand-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    color: var(--accent);
-    letter-spacing: -0.3px;
-  }
-  .brand-sub {
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 3px;
-  }
+  .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--ink); padding-bottom: 28px; margin-bottom: 48px; }
+  .brand-name { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--accent); letter-spacing: -0.3px; }
+  .brand-sub { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
   .header-right { text-align: right; }
-  .doc-meta {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.9;
-  }
+  .doc-meta { font-size: 12px; color: var(--muted); line-height: 1.9; }
   .doc-meta strong { color: var(--ink); font-weight: 500; }
-  .contact-info {
-    margin-top: 8px;
-    font-size: 11.5px;
-    color: var(--muted);
-    line-height: 1.8;
-  }
+  .contact-info { margin-top: 8px; font-size: 11.5px; color: var(--muted); line-height: 1.8; }
   .contact-info a { color: var(--accent); text-decoration: none; font-weight: 400; }
   .contact-info a:hover { text-decoration: underline; }
 
   /* HERO */
   .hero { margin-bottom: 48px; }
-  .proposal-label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 42px;
-    line-height: 1.15;
-    letter-spacing: -1px;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
+  .proposal-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: 42px; line-height: 1.15; letter-spacing: -1px; color: var(--accent); margin-bottom: 16px; }
   .hero h1 em { font-style: italic; color: var(--gold); }
-  .hero-intro {
-    font-size: 15px;
-    color: var(--muted);
-    max-width: 560px;
-    line-height: 1.75;
-    border-left: 3px solid var(--gold);
-    padding-left: 18px;
-  }
+  .hero-intro { font-size: 15px; color: var(--muted); max-width: 560px; line-height: 1.75; border-left: 3px solid var(--gold); padding-left: 18px; }
 
   /* SECTION LABEL */
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 600;
-    margin-bottom: 20px;
-  }
+  .section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 20px; }
 
   /* CONTEXT */
-  .context {
-    background: var(--highlight);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 28px 32px;
-    margin-bottom: 48px;
-  }
+  .context { background: var(--highlight); border: 1px solid var(--border); border-radius: 4px; padding: 28px 32px; margin-bottom: 48px; }
   .context p { font-size: 14.5px; color: #3a3a3a; line-height: 1.8; }
 
   /* SERVICE CARDS */
   .services { margin-bottom: 48px; }
-  .service-card {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    transition: box-shadow 0.2s;
-  }
+  .service-card { border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; overflow: hidden; transition: box-shadow 0.2s; }
   .service-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
-  .service-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 28px;
-    background: var(--accent);
-    color: white;
-  }
-  .service-tool {
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 3px;
-  }
-  .service-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-  }
-  .service-price {
-    font-family: 'DM Serif Display', serif;
-    font-size: 24px;
-    color: var(--gold);
-    text-align: right;
-  }
-  .service-price span {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    color: rgba(255,255,255,0.4);
-    font-weight: 300;
-    display: block;
-    margin-top: 2px;
-  }
+  .service-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 28px; background: var(--accent); color: white; }
+  .service-tool { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 3px; }
+  .service-name { font-family: 'DM Serif Display', serif; font-size: 20px; }
+  .service-price { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--gold); text-align: right; }
+  .service-price span { font-family: 'DM Sans', sans-serif; font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 300; display: block; margin-top: 2px; }
   .service-body { padding: 22px 28px; background: white; }
   .service-desc { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.75; }
   .value-points { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-  .value-points li {
-    font-size: 13.5px;
-    color: #3a3a3a;
-    padding-left: 20px;
-    position: relative;
-    line-height: 1.6;
+  .value-points li { font-size: 13.5px; color: #3a3a3a; padding-left: 20px; position: relative; line-height: 1.6; }
+  .value-points li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 12px; top: 1px; }
+
+  /* LEARN MORE LINK */
+  .learn-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: border-color 0.18s, color 0.18s;
   }
-  .value-points li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--gold);
-    font-size: 12px;
-    top: 1px;
-  }
+  .learn-more-link:hover { color: var(--gold); border-color: var(--gold); }
+  .learn-more-link::after { content: '→'; font-size: 12px; }
 
   /* CAL.COM SUB-CARD */
   .cal-sub { margin-top: 20px; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
-  .cal-sub-header {
-    background: var(--highlight);
-    padding: 14px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .cal-sub-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 16px;
-    color: var(--accent);
-    margin-top: 2px;
-  }
-  .included-tag {
-    display: inline-block;
-    background: #e8f4ee;
-    color: #1a6b3a;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 2px;
-  }
+  .cal-sub-header { background: var(--highlight); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .cal-sub-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--accent); margin-top: 2px; }
+  .included-tag { display: inline-block; background: #e8f4ee; color: #1a6b3a; font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; }
   .cal-sub-body { padding: 16px 20px; background: white; }
-  .calendly-note {
-    margin-top: 14px;
-    background: #fffbf0;
-    border: 1px solid #f0e0a0;
-    border-radius: 3px;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: #7a6020;
-    line-height: 1.65;
-  }
+  .calendly-note { margin-top: 14px; background: #fffbf0; border: 1px solid #f0e0a0; border-radius: 3px; padding: 12px 16px; font-size: 13px; color: #7a6020; line-height: 1.65; }
   .calendly-note strong { font-weight: 600; }
 
   /* RETAINER */
   .retainer { margin-bottom: 48px; }
   .retainer-card { border: 2px solid var(--accent); border-radius: 4px; overflow: hidden; }
-  .retainer-header {
-    background: var(--accent);
-    color: white;
-    padding: 22px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .retainer-eyebrow {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-    margin-bottom: 4px;
-  }
+  .retainer-header { background: var(--accent); color: white; padding: 22px 28px; display: flex; justify-content: space-between; align-items: center; }
+  .retainer-eyebrow { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px; }
   .retainer-title { font-family: 'DM Serif Display', serif; font-size: 22px; }
   .retainer-price { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--gold); }
   .retainer-price-sub { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 1px; text-align: right; }
-  .retainer-body {
-    padding: 24px 28px;
-    background: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-  .retainer-col h4 {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
+  .retainer-body { padding: 24px 28px; background: white; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .retainer-col h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 12px; }
   .retainer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .retainer-col ul li {
-    font-size: 13.5px;
-    color: #3a3a3a;
-    padding-left: 18px;
-    position: relative;
-    line-height: 1.55;
-  }
+  .retainer-col ul li { font-size: 13.5px; color: #3a3a3a; padding-left: 18px; position: relative; line-height: 1.55; }
   .retainer-col ul li::before { content: '✓'; position: absolute; left: 0; color: #1a6b3a; font-size: 12px; }
-  .overage-note {
-    background: var(--highlight);
-    border-top: 1px solid var(--border);
-    padding: 14px 28px;
-    font-size: 13px;
-    color: var(--muted);
-  }
+  .overage-note { background: var(--highlight); border-top: 1px solid var(--border); padding: 14px 28px; font-size: 13px; color: var(--muted); }
   .overage-note strong { color: var(--ink); font-weight: 500; }
 
   /* SCOPE OF WORK */
   .sow { margin-bottom: 48px; }
-  .sow-week {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-  .sow-week-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 24px;
-    background: var(--accent);
-    color: white;
-  }
-  .week-badge {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    white-space: nowrap;
-  }
-  .week-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-  }
+  .sow-week { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 16px; }
+  .sow-week-header { display: flex; align-items: center; gap: 16px; padding: 16px 24px; background: var(--accent); color: white; }
+  .week-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); white-space: nowrap; }
+  .week-title { font-family: 'DM Serif Display', serif; font-size: 18px; }
   .sow-week-body { padding: 18px 24px; background: white; }
   .sow-tasks { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .sow-tasks li {
-    font-size: 13.5px;
-    color: #3a3a3a;
-    padding-left: 20px;
-    position: relative;
-    line-height: 1.6;
-  }
-  .sow-tasks li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--gold);
-    font-size: 12px;
-    top: 2px;
-  }
-  .sow-tasks li em {
-    font-style: normal;
-    color: var(--muted);
-    font-size: 12.5px;
-  }
-  .sow-note {
-    margin-top: 16px;
-    background: var(--highlight);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 14px 20px;
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
+  .sow-tasks li { font-size: 13.5px; color: #3a3a3a; padding-left: 20px; position: relative; line-height: 1.6; }
+  .sow-tasks li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 12px; top: 2px; }
+  .sow-note { margin-top: 16px; background: var(--highlight); border: 1px solid var(--border); border-radius: 4px; padding: 14px 20px; font-size: 13px; color: var(--muted); line-height: 1.7; }
   .sow-note strong { color: var(--accent); font-weight: 600; }
 
   /* TIMELINE */
   .timeline-section { margin-bottom: 48px; }
-  .timeline {
-    position: relative;
-    padding-left: 32px;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
-    background: var(--border);
-  }
-  .timeline-item {
-    position: relative;
-    margin-bottom: 28px;
-  }
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+  .timeline-item { position: relative; margin-bottom: 28px; }
   .timeline-item:last-child { margin-bottom: 0; }
-  .timeline-dot {
-    position: absolute;
-    left: -28px;
-    top: 6px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--paper);
-    box-shadow: 0 0 0 2px var(--accent);
-  }
-  .timeline-dot.gold {
-    background: var(--gold);
-    box-shadow: 0 0 0 2px var(--gold);
-  }
-  .timeline-week {
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .timeline-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    color: var(--accent);
-    margin-bottom: 6px;
-  }
+  .timeline-dot { position: absolute; left: -28px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--paper); box-shadow: 0 0 0 2px var(--accent); }
+  .timeline-dot.gold { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+  .timeline-week { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+  .timeline-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--accent); margin-bottom: 6px; }
   .timeline-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+  /* WHAT YOU'LL NEED */
+  .needs { margin-bottom: 48px; }
+  .needs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .need-item { display: flex; align-items: flex-start; gap: 12px; background: white; border: 1px solid var(--border); border-radius: 4px; padding: 16px 18px; }
+  .need-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .need-text h4 { font-size: 13.5px; font-weight: 500; color: var(--accent); margin-bottom: 3px; }
+  .need-text p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
 
   /* INVESTMENT */
   .investment { margin-bottom: 48px; }
@@ -406,111 +192,140 @@
   .investment-table tr:last-child { border-bottom: none; }
   .investment-table td { padding: 14px 0; color: #3a3a3a; }
   .investment-table td:last-child { text-align: right; font-weight: 500; color: var(--ink); }
-  .total-row td {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    color: var(--accent);
-    padding-top: 20px;
-    border-top: 2px solid var(--ink) !important;
-  }
+  .total-row td { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--accent); padding-top: 20px; border-top: 2px solid var(--ink) !important; }
   .total-row td:last-child { color: var(--gold); }
-  .payment-note {
-    margin-top: 16px;
-    background: var(--highlight);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 16px 20px;
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
+  .payment-note { margin-top: 16px; background: var(--highlight); border: 1px solid var(--border); border-radius: 4px; padding: 16px 20px; font-size: 13px; color: var(--muted); line-height: 1.7; }
   .payment-note strong { color: var(--accent); font-weight: 600; }
+
+  /* TOTAL MONTHLY COST */
+  .monthly-cost { margin-bottom: 48px; }
+  .monthly-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .monthly-table tr { border-bottom: 1px solid var(--border); }
+  .monthly-table td { padding: 13px 0; color: #3a3a3a; }
+  .monthly-table td:last-child { text-align: right; font-weight: 500; color: var(--ink); }
+  .monthly-table .nuvello-row td { color: var(--accent); }
+  .monthly-table .approx-row td { color: var(--muted); font-size: 13px; }
+  .monthly-table .approx-row td:last-child { font-weight: 400; }
+  .monthly-total td { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--accent); padding-top: 20px; border-top: 2px solid var(--ink) !important; }
+  .monthly-total td:last-child { color: var(--gold); }
+  .monthly-note { margin-top: 14px; font-size: 12.5px; color: var(--muted); line-height: 1.7; font-style: italic; }
+  .monthly-note strong { font-style: normal; color: var(--accent); font-weight: 500; }
+
+  /* MEET BENJAMIN */
+  .meet { margin-bottom: 48px; }
+  .meet-card { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; background: white; }
+  .meet-body { padding: 28px 32px; display: flex; gap: 28px; align-items: flex-start; }
+  .meet-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--gold); flex-shrink: 0; }
+  .meet-content h3 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--accent); margin-bottom: 4px; }
+  .meet-content .meet-title { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .meet-content p { font-size: 14px; color: #3a3a3a; line-height: 1.8; }
+  .meet-content p + p { margin-top: 10px; }
+  .meet-contact { display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
+  .meet-contact a { font-size: 13px; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 5px; font-weight: 400; }
+  .meet-contact a:hover { text-decoration: underline; }
+
+  /* FAQ CTA */
+  .faq-cta { margin-bottom: 48px; background: var(--accent); border-radius: 6px; padding: 36px 40px; display: flex; justify-content: space-between; align-items: center; gap: 32px; }
+  .faq-cta-text h2 { font-family: 'DM Serif Display', serif; font-size: 26px; color: white; margin-bottom: 8px; letter-spacing: -0.3px; }
+  .faq-cta-text p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.65; max-width: 380px; }
+  .faq-cta-btn { display: inline-block; background: var(--gold); color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: 0.5px; padding: 13px 28px; border-radius: 3px; text-decoration: none; white-space: nowrap; transition: opacity 0.18s; flex-shrink: 0; }
+  .faq-cta-btn:hover { opacity: 0.88; }
 
   /* TESTIMONIAL */
   .testimonial { margin-bottom: 48px; }
-  .testimonial-box {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 28px 32px;
-    background: white;
-  }
+  .testimonial-box { border: 1px solid var(--border); border-radius: 4px; padding: 28px 32px; background: white; }
   .testimonial-box p { font-size: 14px; color: #3a3a3a; line-height: 1.8; }
 
   /* SIGNATURES */
   .signature-section { margin-bottom: 48px; }
   .sig-intro { font-size: 13.5px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
   .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .sig-role {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
+  .sig-role { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
   .sig-name { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--accent); margin-bottom: 2px; }
   .sig-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
-  .sig-line {
-    border-bottom: 1.5px solid var(--ink);
-    height: 52px;
-    position: relative;
-    margin-bottom: 16px;
-  }
-  .sig-line::after {
-    content: 'Signature';
-    position: absolute;
-    bottom: 7px;
-    left: 0;
-    font-size: 10px;
-    color: #ccc;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .sig-date {
-    border-bottom: 1px solid var(--border);
-    height: 32px;
-    position: relative;
-  }
-  .sig-date::after {
-    content: 'Date';
-    position: absolute;
-    bottom: 7px;
-    left: 0;
-    font-size: 10px;
-    color: #ccc;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
+  .sig-line { border-bottom: 1.5px solid var(--ink); height: 52px; position: relative; margin-bottom: 16px; }
+  .sig-line::after { content: 'Signature'; position: absolute; bottom: 7px; left: 0; font-size: 10px; color: #ccc; letter-spacing: 1px; text-transform: uppercase; }
+  .sig-date { border-bottom: 1px solid var(--border); height: 32px; position: relative; }
+  .sig-date::after { content: 'Date'; position: absolute; bottom: 7px; left: 0; font-size: 10px; color: #ccc; letter-spacing: 1px; text-transform: uppercase; }
 
   /* FOOTER */
-  .footer {
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11.5px;
-    color: var(--muted);
-  }
+  .footer { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--muted); }
   .footer strong { color: var(--accent); font-weight: 500; }
   .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  /* FLOATING CTA */
+  .floating-cta {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .floating-btn {
+    background: var(--accent);
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 40px;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.18s, transform 0.18s;
+    white-space: nowrap;
+  }
+  .floating-btn:hover { background: #0f2419; transform: translateY(-2px); }
+  .floating-btn .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
 
   @media print {
     body { background: white; }
     .page { padding: 40px; }
     * { animation: none !important; opacity: 1 !important; }
+    nav, .floating-cta { display: none !important; }
   }
   @media (max-width: 600px) {
-    .page { padding: 32px 20px; }
+    nav { padding: 0 20px; }
+    .nav-links a { padding: 6px 10px; font-size: 11.5px; }
+    .page { padding: 32px 20px 100px; }
     .hero h1 { font-size: 30px; }
     .retainer-body { grid-template-columns: 1fr; }
     .sig-grid { grid-template-columns: 1fr; }
     .header { flex-direction: column; gap: 16px; }
     .header-right { text-align: left; }
+    .needs-grid { grid-template-columns: 1fr; }
+    .faq-cta { flex-direction: column; padding: 28px 24px; }
+    .faq-cta-btn { width: 100%; text-align: center; }
+    .meet-body { flex-direction: column; }
+    .floating-cta { bottom: 16px; right: 16px; }
   }
 </style>
 </head>
 <body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">NuvelloWeb LLC</a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Proposal</a>
+    <div class="nav-divider"></div>
+    <a href="services/retellai.html">Retell AI</a>
+    <a href="services/calcom.html">Cal.com</a>
+    <a href="services/pipedrive.html">Pipedrive</a>
+    <a href="faq.index">FAQ</a>
+  </div>
+</nav>
+
+<!-- FLOATING CTA -->
+<div class="floating-cta">
+  <a href="faq.index" class="floating-btn"><span class="dot"></span> Have questions? Read the FAQ</a>
+</div>
+
 <div class="page">
 
   <!-- HEADER -->
@@ -588,10 +403,12 @@
               <li>100% free — zero monthly cost to you</li>
             </ul>
             <div class="calendly-note">
-              <strong>A note on Calendly:</strong> You may already be familiar with Calendly as a scheduling tool. While Calendly works well for manual booking, it requires additional paid middleware to connect with an AI caller like Retell. Cal.com offers the same ease of use — and is completely free — while integrating directly and natively with Retell AI. It's the smarter, simpler choice for this system, and you won't notice a difference in day-to-day use.
+              <strong>A note on Calendly:</strong> You may already be familiar with Calendly. While it works well for manual booking, it requires additional paid tools to connect with an AI caller like Retell. Cal.com does the same job — for free — and integrates directly. You won't notice a difference in day-to-day use.
             </div>
+            <a href="services/calcom.html" class="learn-more-link">Learn more about Cal.com</a>
           </div>
         </div>
+        <a href="services/retellai.html" class="learn-more-link" style="margin-top:20px;">Learn more about Retell AI</a>
       </div>
     </div>
 
@@ -613,6 +430,7 @@
           <li>Connects with your AI caller so new leads flow in automatically</li>
           <li>Access everything from your phone or laptop, anywhere you are</li>
         </ul>
+        <a href="services/pipedrive.html" class="learn-more-link">Learn more about Pipedrive</a>
       </div>
     </div>
   </div>
@@ -662,12 +480,8 @@
   <!-- SCOPE OF WORK -->
   <div class="sow anim d6">
     <div class="section-label">Scope of Work</div>
-
     <div class="sow-week">
-      <div class="sow-week-header">
-        <div class="week-badge">Week 1</div>
-        <div class="week-title">Foundation & Account Setup</div>
-      </div>
+      <div class="sow-week-header"><div class="week-badge">Week 1</div><div class="week-title">Foundation & Account Setup</div></div>
       <div class="sow-week-body">
         <ul class="sow-tasks">
           <li>Create and configure your Pipedrive CRM account — custom pipeline stages, fields, and settings tailored to life insurance sales</li>
@@ -677,12 +491,8 @@
         </ul>
       </div>
     </div>
-
     <div class="sow-week">
-      <div class="sow-week-header">
-        <div class="week-badge">Week 2</div>
-        <div class="week-title">AI Caller Build & Scripting</div>
-      </div>
+      <div class="sow-week-header"><div class="week-badge">Week 2</div><div class="week-title">AI Caller Build & Scripting</div></div>
       <div class="sow-week-body">
         <ul class="sow-tasks">
           <li>Write and refine a custom AI call script — tailored to life insurance outreach, FFL positioning, and Christelle's natural communication style</li>
@@ -692,12 +502,8 @@
         </ul>
       </div>
     </div>
-
     <div class="sow-week">
-      <div class="sow-week-header">
-        <div class="week-badge">Week 3</div>
-        <div class="week-title">Integration, Lead Flow & Testing</div>
-      </div>
+      <div class="sow-week-header"><div class="week-badge">Week 3</div><div class="week-title">Integration, Lead Flow & Testing</div></div>
       <div class="sow-week-body">
         <ul class="sow-tasks">
           <li>Connect Retell AI to Pipedrive — booked appointments and call outcomes log automatically</li>
@@ -708,12 +514,8 @@
         </ul>
       </div>
     </div>
-
     <div class="sow-week">
-      <div class="sow-week-header">
-        <div class="week-badge">Week 4</div>
-        <div class="week-title">Launch, Training & Handoff</div>
-      </div>
+      <div class="sow-week-header"><div class="week-badge">Week 4</div><div class="week-title">Launch, Training & Handoff</div></div>
       <div class="sow-week-body">
         <ul class="sow-tasks">
           <li>Final QA pass — review all integrations, test call quality, verify appointment booking and CRM logging</li>
@@ -724,7 +526,6 @@
         </ul>
       </div>
     </div>
-
     <div class="sow-note">
       <strong>Lead Import & Data Migration:</strong> The process for importing existing leads from upline management into Pipedrive will be scoped and discussed separately based on the volume, format, and source of those leads. This will be planned collaboratively to ensure a clean, organized pipeline from day one.
     </div>
@@ -761,9 +562,58 @@
     </div>
   </div>
 
+  <!-- WHAT YOU'LL NEED -->
+  <div class="needs anim d8">
+    <div class="section-label">What You'll Need Before We Start</div>
+    <div class="needs-grid">
+      <div class="need-item">
+        <div class="need-icon">📧</div>
+        <div class="need-text">
+          <h4>A Gmail or Google Account</h4>
+          <p>Used to sync your calendar with Cal.com so appointments land in the right place.</p>
+        </div>
+      </div>
+      <div class="need-item">
+        <div class="need-icon">📋</div>
+        <div class="need-text">
+          <h4>Your Lead List</h4>
+          <p>Whatever format your upline provides leads — spreadsheet, list, or otherwise. We'll sort out the import together.</p>
+        </div>
+      </div>
+      <div class="need-item">
+        <div class="need-icon">💳</div>
+        <div class="need-text">
+          <h4>A Card for Platform Subscriptions</h4>
+          <p>Retell AI and Pipedrive have their own monthly costs billed directly to you. We'll walk through the right plan for each.</p>
+        </div>
+      </div>
+      <div class="need-item">
+        <div class="need-icon">🕐</div>
+        <div class="need-text">
+          <h4>About 1–2 Hours Per Week</h4>
+          <p>For our weekly sessions during setup. After go-live, your time commitment drops significantly — the system runs itself.</p>
+        </div>
+      </div>
+      <div class="need-item">
+        <div class="need-icon">📞</div>
+        <div class="need-text">
+          <h4>A Dedicated Phone Number (Optional)</h4>
+          <p>Retell AI will provision a number for your AI caller. You don't need to provide one — we'll set it up for you.</p>
+        </div>
+      </div>
+      <div class="need-item">
+        <div class="need-icon">✅</div>
+        <div class="need-text">
+          <h4>Your Availability & Working Hours</h4>
+          <p>So we can configure Cal.com correctly and make sure leads only book you when you're actually available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- INVESTMENT SUMMARY -->
-  <div class="investment anim d8">
-    <div class="section-label">Investment Summary</div>
+  <div class="investment anim d9">
+    <div class="section-label">Investment Summary — Setup</div>
     <table class="investment-table">
       <tr>
         <td>Retell AI Setup <span style="color:var(--muted);font-size:12px;">(incl. Cal.com integration)</span></td>
@@ -783,8 +633,66 @@
     </div>
   </div>
 
+  <!-- TOTAL MONTHLY COST -->
+  <div class="monthly-cost anim d9">
+    <div class="section-label">Your Full Monthly Cost Picture</div>
+    <table class="monthly-table">
+      <tr class="nuvello-row">
+        <td>NuvelloWeb Retainer <span style="color:var(--muted);font-size:12px;">(5 hrs tutoring + support)</span></td>
+        <td>$400/mo</td>
+      </tr>
+      <tr class="approx-row">
+        <td>Retell AI Platform <span style="color:var(--muted);font-size:12px;">(billed by Retell directly — varies by call volume)</span></td>
+        <td>~$30–80/mo</td>
+      </tr>
+      <tr class="approx-row">
+        <td>Pipedrive CRM <span style="color:var(--muted);font-size:12px;">(billed by Pipedrive directly)</span></td>
+        <td>~$14–24/mo</td>
+      </tr>
+      <tr class="approx-row">
+        <td>Cal.com</td>
+        <td>Free</td>
+      </tr>
+      <tr class="total-row monthly-total">
+        <td>Estimated Monthly Total</td>
+        <td>~$444–504/mo</td>
+      </tr>
+    </table>
+    <p class="monthly-note">Third-party platform costs (Retell AI, Pipedrive) are estimates based on typical solo-user plans and average call volumes. <strong>We'll review exact pricing together during setup</strong> so you know precisely what you're committing to before anything goes live.</p>
+  </div>
+
+  <!-- MEET BENJAMIN -->
+  <div class="meet anim d10">
+    <div class="section-label">Who You're Working With</div>
+    <div class="meet-card">
+      <div class="meet-body">
+        <div class="meet-avatar">B</div>
+        <div class="meet-content">
+          <h3>Benjamin Krikler</h3>
+          <div class="meet-title">Founder, NuvelloWeb LLC</div>
+          <p>I'm a local tech consultant based here in the area — not a faceless agency, not a remote freelancer you'll never meet in person. We sat down at Starbucks because that's how I work: in plain English, face to face, with people I actually want to help succeed.</p>
+          <p>My focus is on setting up practical, working technology for small business owners and independent professionals who don't have a tech background — and making sure you actually feel confident using it, not just handed a system and left to figure it out. Your success with this is what builds my business, so I'm genuinely invested in making it work for you.</p>
+          <div class="meet-contact">
+            <a href="mailto:benjamin@nuvelloweb.com">✉ benjamin@nuvelloweb.com</a>
+            <a href="tel:+16465332243">📞 +1 (646) 533-2243</a>
+            <a href="https://nuvelloweb.com" target="_blank">🌐 nuvelloweb.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ CTA -->
+  <div class="faq-cta anim d11">
+    <div class="faq-cta-text">
+      <h2>Still Have Questions?</h2>
+      <p>We put together a plain-English FAQ covering everything from "will the AI sound robotic?" to "what happens if something breaks?" — written specifically for you.</p>
+    </div>
+    <a href="faq.index" class="faq-cta-btn">Read the FAQ →</a>
+  </div>
+
   <!-- MUTUAL AGREEMENT -->
-  <div class="testimonial anim d9">
+  <div class="testimonial anim d12">
     <div class="section-label">Mutual Agreement</div>
     <div class="testimonial-box">
       <p>In the spirit of this partnership, NuvelloWeb LLC is offering the above services at a preferred rate in exchange for Christelle Polovin's willingness to provide an honest written testimonial and/or review upon satisfactory completion of the setup phase. This testimonial may be used by NuvelloWeb LLC for portfolio and marketing purposes. There is no obligation to provide a positive review — only an honest one.</p>
@@ -792,7 +700,7 @@
   </div>
 
   <!-- SIGNATURES -->
-  <div class="signature-section anim d10">
+  <div class="signature-section anim d12">
     <div class="section-label">Agreement & Signatures</div>
     <p class="sig-intro">By signing below, both parties agree to the services, pricing, scope, and terms outlined in this proposal. This document serves as a binding service agreement upon execution by both parties.</p>
     <div class="sig-grid">
@@ -814,7 +722,7 @@
   </div>
 
   <!-- FOOTER -->
-  <div class="footer anim d11">
+  <div class="footer anim d13">
     <div><strong>NuvelloWeb LLC</strong> · Benjamin Krikler</div>
     <div>
       <a href="mailto:benjamin@nuvelloweb.com">benjamin@nuvelloweb.com</a> ·
