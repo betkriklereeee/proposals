@@ -309,7 +309,7 @@
     <a href="services/retellai.html">Retell AI</a>
     <a href="services/calcom.html">Cal.com</a>
     <a href="services/pipedrive.html">Pipedrive</a>
-    <a href="faq.index" class="active">FAQ</a>
+    <a href="faq.html" class="active">FAQ</a>
   </div>
 </nav>
 
@@ -547,4 +547,12 @@
     const item = btn.closest('.faq-item');
     const isOpen = item.classList.contains('open');
     // close all
-    document.querySelectorAll('.faq-item.open').f
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    // open this one if it was closed
+    if (!isOpen) item.classList.add('open');
+  }
+  // open first item by default
+  document.querySelector('.faq-item').classList.add('open');
+</script>
+</body>
+</html>
