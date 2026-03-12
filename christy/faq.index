@@ -305,10 +305,10 @@
   <div class="nav-links">
     <a href="index.html">Proposal</a>
     <div class="nav-divider"></div>
-    <a href="retell.html">Retell AI</a>
-    <a href="calcom.html">Cal.com</a>
-    <a href="pipedrive.html">Pipedrive</a>
-    <a href="faq.html" class="active">FAQ</a>
+    <a href="services/retellai.html">Retell AI</a>
+    <a href="services/calcom.html">Cal.com</a>
+    <a href="services/pipedrive.html">Pipedrive</a>
+    <a href="faq.index" class="active">FAQ</a>
   </div>
 </nav>
 

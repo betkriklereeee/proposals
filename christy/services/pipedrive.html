@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipedrive — NuvelloWeb LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #faf8f4;
+    --accent: #1a3a2a;
+    --gold: #c9a84c;
+    --muted: #6b6b6b;
+    --border: #e2ddd6;
+    --highlight: #f0ece4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--accent);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .nav-brand { font-family: 'DM Serif Display', serif; font-size: 17px; color: white; text-decoration: none; letter-spacing: -0.2px; }
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-links a {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    transition: all 0.18s ease;
+    font-weight: 400;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
+  .nav-links a.active { color: var(--gold); font-weight: 500; }
+  .nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.15); margin: 0 4px; }
+
+  /* PAGE */
+  .page { max-width: 780px; margin: 0 auto; padding: 60px 40px 80px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .anim { animation: fadeUp 0.6s ease both; opacity: 0; }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.15s; }
+  .d3 { animation-delay: 0.25s; }
+  .d4 { animation-delay: 0.33s; }
+  .d5 { animation-delay: 0.40s; }
+  .d6 { animation-delay: 0.47s; }
+
+  /* BACK LINK */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 48px;
+    transition: color 0.18s;
+  }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: '←'; font-size: 14px; }
+
+  /* HERO */
+  .hero { margin-bottom: 52px; }
+  .page-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: 40px; line-height: 1.15; letter-spacing: -1px; color: var(--accent); margin-bottom: 16px; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-intro { font-size: 15px; color: var(--muted); max-width: 560px; line-height: 1.75; border-left: 3px solid var(--gold); padding-left: 18px; }
+
+  /* SECTION LABEL */
+  .section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 20px; }
+
+  /* EXPLAINER */
+  .explainer { background: var(--highlight); border: 1px solid var(--border); border-radius: 4px; padding: 32px 36px; margin-bottom: 48px; }
+  .explainer p { font-size: 14.5px; color: #3a3a3a; line-height: 1.85; }
+  .explainer p + p { margin-top: 14px; }
+  .explainer strong { color: var(--accent); font-weight: 500; }
+
+  /* BEFORE / AFTER */
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px; }
+  .ba-card { border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+  .ba-header { padding: 14px 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+  .ba-card.before .ba-header { background: #f5f0ea; color: #9a8060; }
+  .ba-card.after .ba-header { background: var(--accent); color: rgba(255,255,255,0.7); }
+  .ba-body { padding: 18px 20px; background: white; }
+  .ba-body ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .ba-body ul li { font-size: 13.5px; color: #3a3a3a; padding-left: 20px; position: relative; line-height: 1.55; }
+  .ba-card.before .ba-body ul li::before { content: '✗'; position: absolute; left: 0; color: #c97a7a; font-size: 13px; }
+  .ba-card.after .ba-body ul li::before { content: '✓'; position: absolute; left: 0; color: #1a6b3a; font-size: 13px; }
+
+  /* PIPELINE VISUAL */
+  .pipeline-section { margin-bottom: 48px; }
+  .pipeline { display: flex; gap: 0; overflow-x: auto; padding-bottom: 8px; }
+  .pipeline-stage {
+    flex: 1;
+    min-width: 120px;
+    border: 1px solid var(--border);
+    border-right: none;
+    background: white;
+    transition: background 0.2s;
+  }
+  .pipeline-stage:first-child { border-radius: 4px 0 0 4px; }
+  .pipeline-stage:last-child { border-right: 1px solid var(--border); border-radius: 0 4px 4px 0; }
+  .pipeline-stage:hover { background: var(--highlight); }
+  .stage-header {
+    background: var(--accent);
+    padding: 10px 14px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+  }
+  .pipeline-stage:first-child .stage-header { border-radius: 3px 0 0 0; }
+  .pipeline-stage:last-child .stage-header { border-radius: 0 3px 0 0; }
+  .stage-body { padding: 14px; }
+  .lead-card {
+    background: var(--highlight);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 9px 11px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #3a3a3a;
+    line-height: 1.4;
+  }
+  .lead-card:last-child { margin-bottom: 0; }
+  .lead-card strong { color: var(--accent); font-weight: 500; display: block; font-size: 12.5px; }
+  .lead-card span { color: var(--muted); font-size: 11px; }
+  .pipeline-caption { margin-top: 12px; font-size: 12.5px; color: var(--muted); line-height: 1.6; font-style: italic; }
+
+  /* FEATURE LIST */
+  .features { margin-bottom: 48px; }
+  .feature-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .feature-item:first-of-type { border-top: 1px solid var(--border); }
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background: var(--highlight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .feature-content h4 { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--accent); margin-bottom: 5px; }
+  .feature-content p { font-size: 14px; color: #3a3a3a; line-height: 1.75; }
+  .feature-content p strong { color: var(--accent); font-weight: 500; }
+
+  /* PRICING NOTE */
+  .pricing-note { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 48px; }
+  .pricing-note-header { background: var(--accent); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .pricing-note-header span { font-family: 'DM Serif Display', serif; font-size: 18px; color: white; }
+  .pricing-badge { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; background: rgba(201,168,76,0.2); color: var(--gold); padding: 4px 12px; border-radius: 2px; font-weight: 500; }
+  .pricing-note-body { padding: 22px 24px; background: white; font-size: 14px; color: #3a3a3a; line-height: 1.8; }
+  .pricing-note-body strong { color: var(--accent); font-weight: 500; }
+  .pricing-note-body p + p { margin-top: 10px; }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--muted); }
+  .footer strong { color: var(--accent); font-weight: 500; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .nav-links a { padding: 6px 10px; font-size: 11.5px; }
+    .page { padding: 40px 20px 60px; }
+    .hero h1 { font-size: 30px; }
+    .before-after { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-brand">NuvelloWeb LLC</a>
+  <div class="nav-links">
+    <a href="../index.html">Proposal</a>
+    <div class="nav-divider"></div>
+    <a href="retellai.html">Retell AI</a>
+    <a href="calcom.html">Cal.com</a>
+    <a href="pipedrive.html" class="active">Pipedrive</a>
+    <a href="../faq.index">FAQ</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <a href="../index.html" class="back-link anim d1">Back to Proposal</a>
+
+  <!-- HERO -->
+  <div class="hero anim d1">
+    <div class="page-label">Learn More · Pipedrive CRM</div>
+    <h1>Every Lead.<br><em>Always Organized.</em></h1>
+    <p class="hero-intro">Pipedrive is your digital command center for leads and clients. Here's what a CRM actually is, why you need one, and how it fits into your new system.</p>
+  </div>
+
+  <!-- WHAT IS IT -->
+  <div class="explainer anim d2">
+    <div class="section-label">What Is a CRM — and Why Does It Matter?</div>
+    <p>CRM stands for <strong>Customer Relationship Manager</strong>. That's a fancy way of saying: a place where all your leads and clients live, organized, trackable, and always up to date.</p>
+    <p>Right now, your leads probably exist somewhere across text messages, a notebook, a spreadsheet, maybe your memory. That works — until it doesn't. Leads slip through. Follow-ups get forgotten. You can't remember if you called someone last week or last month.</p>
+    <p><strong>Pipedrive fixes all of that.</strong> It gives every lead a home in your system, shows you exactly where each one stands, and makes sure nothing ever falls through the cracks — whether that lead came in yesterday or three months ago.</p>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div class="anim d2">
+    <div class="section-label">Before & After Pipedrive</div>
+    <div class="before-after">
+      <div class="ba-card before">
+        <div class="ba-header">Without a CRM</div>
+        <div class="ba-body">
+          <ul>
+            <li>Leads scattered across texts, notebooks, and spreadsheets</li>
+            <li>No way to tell who's been called and who hasn't</li>
+            <li>Forgetting to follow up with warm leads</li>
+            <li>No record of what was said or when</li>
+            <li>Starting from scratch every time you sit down to work</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-header">With Pipedrive</div>
+        <div class="ba-body">
+          <ul>
+            <li>Every lead in one place, organized and searchable</li>
+            <li>Clear view of who's been contacted and what happened</li>
+            <li>Follow-up reminders so nothing slips through</li>
+            <li>Full history of every interaction logged automatically</li>
+            <li>Pick up exactly where you left off, every time</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIPELINE VISUAL -->
+  <div class="pipeline-section anim d3">
+    <div class="section-label">What Your Pipeline Will Look Like</div>
+    <div class="pipeline">
+      <div class="pipeline-stage">
+        <div class="stage-header">New Lead</div>
+        <div class="stage-body">
+          <div class="lead-card"><strong>Maria T.</strong><span>Added today · from upline</span></div>
+          <div class="lead-card"><strong>James R.</strong><span>Added today · from upline</span></div>
+        </div>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-header">AI Called</div>
+        <div class="stage-body">
+          <div class="lead-card"><strong>Sandra K.</strong><span>Called yesterday · voicemail</span></div>
+          <div class="lead-card"><strong>David M.</strong><span>Called · not interested</span></div>
+        </div>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-header">Appt. Booked</div>
+        <div class="stage-body">
+          <div class="lead-card"><strong>Patricia L.</strong><span>Meeting Thu 2pm</span></div>
+        </div>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-header">Met · Follow Up</div>
+        <div class="stage-body">
+          <div class="lead-card"><strong>Robert C.</strong><span>Needs to think it over</span></div>
+        </div>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-header">Closed</div>
+        <div class="stage-body">
+          <div class="lead-card"><strong>Angela W.</strong><span>Policy signed ✓</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="pipeline-caption">This is a simplified preview of what your Pipedrive pipeline will look like — each lead has a card, and you can see at a glance exactly where everyone stands in your process.</p>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features anim d4">
+    <div class="section-label">What Pipedrive Does For You</div>
+
+    <div class="feature-item">
+      <div class="feature-icon">👁️</div>
+      <div class="feature-content">
+        <h4>See Everything at a Glance</h4>
+        <p>Pipedrive uses a visual pipeline — think of it like sticky notes on a board, except it's digital and always up to date. <strong>Every lead has a card. Every card tells you exactly what stage that person is in</strong> and what needs to happen next.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon">🔗</div>
+      <div class="feature-content">
+        <h4>Connected to Your AI Caller</h4>
+        <p>When the AI makes a call, <strong>the outcome gets logged in Pipedrive automatically.</strong> Appointment booked? It shows up. Lead said no? It's noted. You don't have to manually update anything — the system does it for you.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon">📱</div>
+      <div class="feature-content">
+        <h4>Works on Your Phone</h4>
+        <p>Pipedrive has a mobile app so you can <strong>check your pipeline, look up a lead, or add a note right from your phone</strong> — whether you're between appointments, at a coffee shop, or on the go. Your business isn't tied to a desk.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon">🔔</div>
+      <div class="feature-content">
+        <h4>Follow-Up Reminders</h4>
+        <p>Never forget to follow up again. You can set reminders on any lead — <strong>"Call Sandra back on Friday," "Check in with Robert in two weeks"</strong> — and Pipedrive will remind you at the right time. No more sticky notes or hoping you remember.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon">📊</div>
+      <div class="feature-content">
+        <h4>Know What's Working</h4>
+        <p>Over time, Pipedrive shows you patterns — how many leads turn into appointments, how many appointments turn into clients, where people tend to drop off. <strong>That data helps you and Benjamin continuously improve your system</strong> and dial in what converts.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PRICING NOTE -->
+  <div class="pricing-note anim d5">
+    <div class="pricing-note-header">
+      <span>What Does Pipedrive Cost?</span>
+      <span class="pricing-badge">Transparent Pricing</span>
+    </div>
+    <div class="pricing-note-body">
+      <p>Pipedrive has its own monthly subscription — separate from what you pay NuvelloWeb for setup. Their plans start at around $14–$24/month for a solo user, billed directly by Pipedrive.</p>
+      <p><strong>The $200 setup fee covers configuring Pipedrive specifically for your business</strong> — building your pipeline stages, connecting it to Retell AI, setting up your lead entry workflow, and making sure everything is ready to go from day one. We'll walk through the right plan for your needs during setup.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer anim d6">
+    <div><strong>NuvelloWeb LLC</strong> · Benjamin Krikler</div>
+    <div>
+      <a href="mailto:benjamin@nuvelloweb.com">benjamin@nuvelloweb.com</a> ·
+      <a href="tel:+16465332243">+1 (646) 533-2243</a> ·
+      <a href="https://nuvelloweb.com" target="_blank">nuvelloweb.com</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
