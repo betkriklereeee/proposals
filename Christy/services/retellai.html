@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retell AI — NuvelloWeb LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #faf8f4;
+    --accent: #1a3a2a;
+    --gold: #c9a84c;
+    --muted: #6b6b6b;
+    --border: #e2ddd6;
+    --highlight: #f0ece4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--accent);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .nav-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: white;
+    text-decoration: none;
+    letter-spacing: -0.2px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-links a {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    transition: all 0.18s ease;
+    font-weight: 400;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
+  .nav-links a.active { color: var(--gold); font-weight: 500; }
+  .nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.15); margin: 0 4px; }
+
+  /* PAGE */
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .anim { animation: fadeUp 0.6s ease both; opacity: 0; }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.15s; }
+  .d3 { animation-delay: 0.25s; }
+  .d4 { animation-delay: 0.33s; }
+  .d5 { animation-delay: 0.40s; }
+  .d6 { animation-delay: 0.47s; }
+
+  /* HERO */
+  .hero { margin-bottom: 52px; }
+  .page-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-intro {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.75;
+    border-left: 3px solid var(--gold);
+    padding-left: 18px;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  /* EXPLAINER BLOCK */
+  .explainer {
+    background: var(--highlight);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px 36px;
+    margin-bottom: 48px;
+  }
+  .explainer p {
+    font-size: 14.5px;
+    color: #3a3a3a;
+    line-height: 1.85;
+  }
+  .explainer p + p { margin-top: 14px; }
+  .explainer strong { color: var(--accent); font-weight: 500; }
+
+  /* HOW IT WORKS STEPS */
+  .steps { margin-bottom: 48px; }
+  .step {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 28px;
+    align-items: flex-start;
+  }
+  .step:last-child { margin-bottom: 0; }
+  .step-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--border);
+    line-height: 1;
+    min-width: 44px;
+    padding-top: 2px;
+  }
+  .step-content h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--accent);
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+  }
+  .step-content p {
+    font-size: 14px;
+    color: #3a3a3a;
+    line-height: 1.75;
+  }
+  .step-content p strong { color: var(--accent); font-weight: 500; }
+  .step-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 0 28px 68px;
+  }
+
+  /* VALUE CARDS */
+  .value-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .value-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px 24px;
+    background: white;
+    transition: box-shadow 0.2s;
+  }
+  .value-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .value-card-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .value-card h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--accent);
+    margin-bottom: 7px;
+  }
+  .value-card p {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* WHAT TO EXPECT */
+  .expect { margin-bottom: 48px; }
+  .expect-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .expect-list li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: #3a3a3a;
+    line-height: 1.7;
+  }
+  .expect-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .expect-list li strong { color: var(--accent); font-weight: 500; }
+
+  /* PRICING NOTE */
+  .pricing-note {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .pricing-note-header {
+    background: var(--accent);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pricing-note-header span {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: white;
+  }
+  .pricing-badge {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: rgba(201,168,76,0.2);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .pricing-note-body {
+    padding: 22px 24px;
+    background: white;
+    font-size: 14px;
+    color: #3a3a3a;
+    line-height: 1.8;
+  }
+  .pricing-note-body strong { color: var(--accent); font-weight: 500; }
+  .pricing-note-body p + p { margin-top: 10px; }
+
+  /* BACK LINK */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 48px;
+    transition: color 0.18s;
+  }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: '←'; font-size: 14px; }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .footer strong { color: var(--accent); font-weight: 500; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .nav-links a { padding: 6px 10px; font-size: 11.5px; }
+    .page { padding: 40px 20px 60px; }
+    .hero h1 { font-size: 30px; }
+    .value-grid { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">NuvelloWeb LLC</a>
+  <div class="nav-links">
+    <a href="index.html">Proposal</a>
+    <div class="nav-divider"></div>
+    <a href="retell.html" class="active">Retell AI</a>
+    <a href="calcom.html">Cal.com</a>
+    <a href="pipedrive.html">Pipedrive</a>
+    <a href="faq.html">FAQ</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <a href="index.html" class="back-link anim d1">Back to Proposal</a>
+
+  <!-- HERO -->
+  <div class="hero anim d1">
+    <div class="page-label">Learn More · Retell AI</div>
+    <h1>Your AI That<br><em>Makes the Calls.</em></h1>
+    <p class="hero-intro">Retell AI is the engine behind your cold calling system. Here's exactly what it is, how it works, and why it's going to change the way you work leads.</p>
+  </div>
+
+  <!-- WHAT IS IT -->
+  <div class="explainer anim d2">
+    <div class="section-label">What Is Retell AI?</div>
+    <p>Retell AI is a platform that lets you build an <strong>AI-powered voice agent</strong> — essentially a phone caller that sounds like a real person, follows a custom script, and can hold a genuine two-way conversation with your leads.</p>
+    <p>Think of it this way: right now, working a lead list means you sitting down, dialing number after number, leaving voicemails, and hoping someone picks up. With Retell AI, <strong>that entire process happens automatically.</strong> The AI makes the calls, talks to the leads, handles common questions, and books appointments directly onto your calendar — all without you lifting a finger.</p>
+    <p>It was built specifically for businesses that need to reach a lot of people efficiently. For a life insurance agent like you, that means <strong>more conversations happening, more appointments getting booked, and more time for you to do what you do best — close.</strong></p>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="steps anim d3">
+    <div class="section-label">How It Works — Step by Step</div>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <h3>Your leads go into the system</h3>
+        <p>Whether your leads come from your upline, a spreadsheet, or another source — they get loaded into Pipedrive and queued up for the AI to call. <strong>No manual dialing. No sorting through a notebook.</strong> The list is ready to go.</p>
+      </div>
+    </div>
+    <hr class="step-divider">
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <h3>The AI makes the call</h3>
+        <p>Retell AI dials each lead using a real phone number provisioned specifically for you. It introduces itself, follows your custom script, and <strong>responds naturally to whatever the lead says.</strong> It's not reading from a rigid menu — it's having a real conversation.</p>
+      </div>
+    </div>
+    <hr class="step-divider">
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <h3>Interested leads get booked on the spot</h3>
+        <p>When a lead expresses interest, the AI checks your live calendar availability and <strong>books the appointment right there during the call.</strong> The lead gets a confirmation. You get a notification. Done.</p>
+      </div>
+    </div>
+    <hr class="step-divider">
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <h3>Every call is logged and recorded</h3>
+        <p>After each call, Retell saves a full recording and transcript. You can <strong>review exactly what was said, how leads responded, and what the outcome was</strong> — giving you real insight into what's working and what can be improved.</p>
+      </div>
+    </div>
+    <hr class="step-divider">
+
+    <div class="step">
+      <div class="step-number">05</div>
+      <div class="step-content">
+        <h3>You show up for the meeting</h3>
+        <p>That's it. Your only job is to <strong>show up for the appointments that are already on your calendar</strong> and do what you're good at. The AI handled everything before that point.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUE CARDS -->
+  <div class="anim d4">
+    <div class="section-label">Why It Matters for You</div>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-card-icon">📞</div>
+        <h4>Works Around the Clock</h4>
+        <p>The AI doesn't have office hours. It can call leads while you're with a client, in the evening, or on a weekend — whenever your leads are most likely to pick up.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card-icon">🎯</div>
+        <h4>Consistent Every Time</h4>
+        <p>Every lead gets the same quality conversation. No tired calls, no off days, no forgetting part of the script. The message is always sharp and on point.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card-icon">📅</div>
+        <h4>Appointments on Autopilot</h4>
+        <p>No back-and-forth scheduling. When a lead says yes, it's booked instantly. You wake up with meetings already on your calendar.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card-icon">📋</div>
+        <h4>Full Visibility</h4>
+        <p>Every call is recorded and transcribed. You always know exactly what your AI said, how leads responded, and where each conversation stands.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card-icon">⚡</div>
+        <h4>Works Through Large Lists Fast</h4>
+        <p>Where it might take you days to work through 100 leads manually, the AI can move through that list in a fraction of the time — without burning you out.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card-icon">🔧</div>
+        <h4>Built for Your Business</h4>
+        <p>The script, the voice, the tone — everything is customized specifically for life insurance outreach and your FFL positioning. This isn't a generic tool.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT TO EXPECT -->
+  <div class="expect anim d5">
+    <div class="section-label">What to Expect After Setup</div>
+    <ul class="expect-list">
+      <li>
+        <span class="expect-check">✓</span>
+        <span><strong>A dedicated phone number</strong> provisioned specifically for your AI caller — separate from your personal line.</span>
+      </li>
+      <li>
+        <span class="expect-check">✓</span>
+        <span><strong>A custom call script</strong> written around life insurance, your FFL role, and how you like to communicate.</span>
+      </li>
+      <li>
+        <span class="expect-check">✓</span>
+        <span><strong>Test calls before anything goes live</strong> — you'll hear exactly what your leads will hear before a single real call is made.</span>
+      </li>
+      <li>
+        <span class="expect-check">✓</span>
+        <span><strong>A dashboard</strong> where you can see call activity, listen to recordings, and read transcripts at any time.</span>
+      </li>
+      <li>
+        <span class="expect-check">✓</span>
+        <span><strong>Ongoing script refinement</strong> as part of your monthly retainer — as you learn what language converts, we update the AI accordingly.</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- PRICING NOTE -->
+  <div class="pricing-note anim d5">
+    <div class="pricing-note-header">
+      <span>What Does Retell AI Cost?</span>
+      <span class="pricing-badge">Transparent Pricing</span>
+    </div>
+    <div class="pricing-note-body">
+      <p>Retell AI has its own monthly subscription cost — separate from what you pay NuvelloWeb for setup and support. Their pricing is based on call volume and minutes used, and is billed directly to you by Retell.</p>
+      <p><strong>The $400 setup fee you pay NuvelloWeb covers building, configuring, and launching your AI agent</strong> — not the ongoing Retell platform cost. We'll walk through Retell's current pricing together during setup so there are no surprises, and help you choose a plan that fits your lead volume.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer anim d6">
+    <div><strong>NuvelloWeb LLC</strong> · Benjamin Krikler</div>
+    <div>
+      <a href="mailto:benjamin@nuvelloweb.com">benjamin@nuvelloweb.com</a> ·
+      <a href="tel:+16465332243">+1 (646) 533-2243</a> ·
+      <a href="https://nuvelloweb.com" target="_blank">nuvelloweb.com</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
