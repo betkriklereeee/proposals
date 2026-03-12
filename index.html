@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Proposal — Christelle Polovin</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #faf8f4;
+    --accent: #1a3a2a;
+    --gold: #c9a84c;
+    --muted: #6b6b6b;
+    --border: #e2ddd6;
+    --highlight: #f0ece4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .anim { animation: fadeUp 0.6s ease both; opacity: 0; }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.15s; }
+  .d3 { animation-delay: 0.25s; }
+  .d4 { animation-delay: 0.32s; }
+  .d5 { animation-delay: 0.38s; }
+  .d6 { animation-delay: 0.44s; }
+  .d7 { animation-delay: 0.50s; }
+  .d8 { animation-delay: 0.56s; }
+  .d9 { animation-delay: 0.62s; }
+  .d10 { animation-delay: 0.68s; }
+  .d11 { animation-delay: 0.74s; }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 28px;
+    margin-bottom: 48px;
+  }
+  .brand-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--accent);
+    letter-spacing: -0.3px;
+  }
+  .brand-sub {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .header-right { text-align: right; }
+  .doc-meta {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+  .doc-meta strong { color: var(--ink); font-weight: 500; }
+  .contact-info {
+    margin-top: 8px;
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .contact-info a { color: var(--accent); text-decoration: none; font-weight: 400; }
+  .contact-info a:hover { text-decoration: underline; }
+
+  /* HERO */
+  .hero { margin-bottom: 48px; }
+  .proposal-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-intro {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.75;
+    border-left: 3px solid var(--gold);
+    padding-left: 18px;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  /* CONTEXT */
+  .context {
+    background: var(--highlight);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+  .context p { font-size: 14.5px; color: #3a3a3a; line-height: 1.8; }
+
+  /* SERVICE CARDS */
+  .services { margin-bottom: 48px; }
+  .service-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .service-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+  .service-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 28px;
+    background: var(--accent);
+    color: white;
+  }
+  .service-tool {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 3px;
+  }
+  .service-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+  }
+  .service-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--gold);
+    text-align: right;
+  }
+  .service-price span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+    display: block;
+    margin-top: 2px;
+  }
+  .service-body { padding: 22px 28px; background: white; }
+  .service-desc { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.75; }
+  .value-points { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .value-points li {
+    font-size: 13.5px;
+    color: #3a3a3a;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .value-points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 12px;
+    top: 1px;
+  }
+
+  /* CAL.COM SUB-CARD */
+  .cal-sub { margin-top: 20px; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
+  .cal-sub-header {
+    background: var(--highlight);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cal-sub-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--accent);
+    margin-top: 2px;
+  }
+  .included-tag {
+    display: inline-block;
+    background: #e8f4ee;
+    color: #1a6b3a;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .cal-sub-body { padding: 16px 20px; background: white; }
+  .calendly-note {
+    margin-top: 14px;
+    background: #fffbf0;
+    border: 1px solid #f0e0a0;
+    border-radius: 3px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #7a6020;
+    line-height: 1.65;
+  }
+  .calendly-note strong { font-weight: 600; }
+
+  /* RETAINER */
+  .retainer { margin-bottom: 48px; }
+  .retainer-card { border: 2px solid var(--accent); border-radius: 4px; overflow: hidden; }
+  .retainer-header {
+    background: var(--accent);
+    color: white;
+    padding: 22px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .retainer-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 4px;
+  }
+  .retainer-title { font-family: 'DM Serif Display', serif; font-size: 22px; }
+  .retainer-price { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--gold); }
+  .retainer-price-sub { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 1px; text-align: right; }
+  .retainer-body {
+    padding: 24px 28px;
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .retainer-col h4 {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .retainer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .retainer-col ul li {
+    font-size: 13.5px;
+    color: #3a3a3a;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+  .retainer-col ul li::before { content: '✓'; position: absolute; left: 0; color: #1a6b3a; font-size: 12px; }
+  .overage-note {
+    background: var(--highlight);
+    border-top: 1px solid var(--border);
+    padding: 14px 28px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .overage-note strong { color: var(--ink); font-weight: 500; }
+
+  /* SCOPE OF WORK */
+  .sow { margin-bottom: 48px; }
+  .sow-week {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .sow-week-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    background: var(--accent);
+    color: white;
+  }
+  .week-badge {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    white-space: nowrap;
+  }
+  .week-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+  }
+  .sow-week-body { padding: 18px 24px; background: white; }
+  .sow-tasks { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .sow-tasks li {
+    font-size: 13.5px;
+    color: #3a3a3a;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .sow-tasks li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 12px;
+    top: 2px;
+  }
+  .sow-tasks li em {
+    font-style: normal;
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+  .sow-note {
+    margin-top: 16px;
+    background: var(--highlight);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 20px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .sow-note strong { color: var(--accent); font-weight: 600; }
+
+  /* TIMELINE */
+  .timeline-section { margin-bottom: 48px; }
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .timeline-dot.gold {
+    background: var(--gold);
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+  .timeline-week {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .timeline-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .timeline-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+  /* INVESTMENT */
+  .investment { margin-bottom: 48px; }
+  .investment-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .investment-table tr { border-bottom: 1px solid var(--border); }
+  .investment-table tr:last-child { border-bottom: none; }
+  .investment-table td { padding: 14px 0; color: #3a3a3a; }
+  .investment-table td:last-child { text-align: right; font-weight: 500; color: var(--ink); }
+  .total-row td {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--accent);
+    padding-top: 20px;
+    border-top: 2px solid var(--ink) !important;
+  }
+  .total-row td:last-child { color: var(--gold); }
+  .payment-note {
+    margin-top: 16px;
+    background: var(--highlight);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .payment-note strong { color: var(--accent); font-weight: 600; }
+
+  /* TESTIMONIAL */
+  .testimonial { margin-bottom: 48px; }
+  .testimonial-box {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    background: white;
+  }
+  .testimonial-box p { font-size: 14px; color: #3a3a3a; line-height: 1.8; }
+
+  /* SIGNATURES */
+  .signature-section { margin-bottom: 48px; }
+  .sig-intro { font-size: 13.5px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+  .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .sig-role {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .sig-name { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--accent); margin-bottom: 2px; }
+  .sig-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  .sig-line {
+    border-bottom: 1.5px solid var(--ink);
+    height: 52px;
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .sig-line::after {
+    content: 'Signature';
+    position: absolute;
+    bottom: 7px;
+    left: 0;
+    font-size: 10px;
+    color: #ccc;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .sig-date {
+    border-bottom: 1px solid var(--border);
+    height: 32px;
+    position: relative;
+  }
+  .sig-date::after {
+    content: 'Date';
+    position: absolute;
+    bottom: 7px;
+    left: 0;
+    font-size: 10px;
+    color: #ccc;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .footer strong { color: var(--accent); font-weight: 500; }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 40px; }
+    * { animation: none !important; opacity: 1 !important; }
+  }
+  @media (max-width: 600px) {
+    .page { padding: 32px 20px; }
+    .hero h1 { font-size: 30px; }
+    .retainer-body { grid-template-columns: 1fr; }
+    .sig-grid { grid-template-columns: 1fr; }
+    .header { flex-direction: column; gap: 16px; }
+    .header-right { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header anim d1">
+    <div>
+      <div class="brand-name">NuvelloWeb LLC</div>
+      <div class="brand-sub">Technology Services</div>
+    </div>
+    <div class="header-right">
+      <div class="doc-meta">
+        <strong>Service Proposal</strong><br>
+        Prepared for: Christelle Polovin<br>
+        Date: March 12, 2026<br>
+        Prepared by: Benjamin Krikler
+      </div>
+      <div class="contact-info">
+        <a href="mailto:benjamin@nuvelloweb.com">benjamin@nuvelloweb.com</a><br>
+        <a href="tel:+16465332243">+1 (646) 533-2243</a><br>
+        <a href="https://nuvelloweb.com" target="_blank">nuvelloweb.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero anim d2">
+    <div class="proposal-label">Proposal</div>
+    <h1>Your AI-Powered<br><em>Lead Machine</em></h1>
+    <p class="hero-intro">A plain-English breakdown of what we're building for you, why it matters, and exactly what you're investing — no tech jargon, no surprises.</p>
+  </div>
+
+  <!-- CONTEXT -->
+  <div class="context anim d3">
+    <div class="section-label">The Big Picture</div>
+    <p>As a 1099 life insurance agent with FFL, your time is your most valuable asset. Right now, working leads means making calls yourself — one by one, manually, on your schedule. This proposal sets you up with a system that does the cold calling for you, books appointments directly onto your calendar, and keeps every lead organized so nothing slips through the cracks. You focus on closing. The technology handles the rest.</p>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="services anim d4">
+    <div class="section-label">One-Time Setup Services</div>
+
+    <!-- Retell AI -->
+    <div class="service-card">
+      <div class="service-header">
+        <div>
+          <div class="service-tool">Powered by Retell AI</div>
+          <div class="service-name">Your 24/7 AI Cold Caller</div>
+        </div>
+        <div class="service-price">$400<span>one-time setup</span></div>
+      </div>
+      <div class="service-body">
+        <p class="service-desc">Retell AI is a voice-powered artificial intelligence platform that makes outbound calls on your behalf — using a custom script, handling conversations naturally, and booking appointments automatically. Think of it as a tireless assistant who works around the clock and never has a bad day.</p>
+        <ul class="value-points">
+          <li>Calls through your lead list automatically — no manual dialing required</li>
+          <li>Uses a custom script written specifically for life insurance conversations</li>
+          <li>When a lead says yes, it books them on your calendar on the spot</li>
+          <li>You only show up for the appointments — the AI handles all the legwork</li>
+          <li>Works while you're with clients, sleeping, or off the clock</li>
+        </ul>
+
+        <!-- Cal.com -->
+        <div class="cal-sub">
+          <div class="cal-sub-header">
+            <div>
+              <div class="service-tool" style="color:#6b6b6b;">Included with Retell AI Setup</div>
+              <div class="cal-sub-name">Cal.com — Your Automated Appointment Book</div>
+            </div>
+            <span class="included-tag">Included Free</span>
+          </div>
+          <div class="cal-sub-body">
+            <p class="service-desc" style="margin-bottom:12px;">Cal.com is a free, modern scheduling tool that plugs directly into Retell AI. The moment a lead says yes to a meeting, it's booked on your calendar instantly — no back-and-forth, no phone tag, no missed opportunities.</p>
+            <ul class="value-points">
+              <li>Connects natively with Retell AI — purpose-built for this exact setup</li>
+              <li>You wake up with appointments already on your calendar</li>
+              <li>Sends automatic reminders to leads so they actually show up</li>
+              <li>100% free — zero monthly cost to you</li>
+            </ul>
+            <div class="calendly-note">
+              <strong>A note on Calendly:</strong> You may already be familiar with Calendly as a scheduling tool. While Calendly works well for manual booking, it requires additional paid middleware to connect with an AI caller like Retell. Cal.com offers the same ease of use — and is completely free — while integrating directly and natively with Retell AI. It's the smarter, simpler choice for this system, and you won't notice a difference in day-to-day use.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipedrive -->
+    <div class="service-card">
+      <div class="service-header">
+        <div>
+          <div class="service-tool">Powered by Pipedrive CRM</div>
+          <div class="service-name">Your Client & Lead Tracker</div>
+        </div>
+        <div class="service-price">$200<span>one-time setup</span></div>
+      </div>
+      <div class="service-body">
+        <p class="service-desc">Pipedrive is a simple, visual CRM (Customer Relationship Manager) — a smart digital home for all your leads and clients. No more hunting through text threads or flipping through notebooks. Everything organized, searchable, and always up to date.</p>
+        <ul class="value-points">
+          <li>See every lead and where they stand — at a glance, in a clean visual pipeline</li>
+          <li>Never lose a prospect in a notebook or a forgotten text thread again</li>
+          <li>Track who's been called, who's interested, and who needs follow-up</li>
+          <li>Connects with your AI caller so new leads flow in automatically</li>
+          <li>Access everything from your phone or laptop, anywhere you are</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- RETAINER -->
+  <div class="retainer anim d5">
+    <div class="section-label">Monthly Retainer</div>
+    <div class="retainer-card">
+      <div class="retainer-header">
+        <div>
+          <div class="retainer-eyebrow">Ongoing Support & Tutoring</div>
+          <div class="retainer-title">Monthly Technology Partnership</div>
+        </div>
+        <div>
+          <div class="retainer-price">$400</div>
+          <div class="retainer-price-sub">per month</div>
+        </div>
+      </div>
+      <div class="retainer-body">
+        <div class="retainer-col">
+          <h4>What's Included</h4>
+          <ul>
+            <li>5 hours of in-person tech tutoring monthly</li>
+            <li>Ongoing system maintenance & monitoring</li>
+            <li>Troubleshooting when things don't go as planned</li>
+            <li>Script updates as you learn what converts</li>
+            <li>Priority support — a real person in your corner</li>
+          </ul>
+        </div>
+        <div class="retainer-col">
+          <h4>What This Means For You</h4>
+          <ul>
+            <li>You're never left alone to figure out the tech</li>
+            <li>We meet in person — no confusing support tickets</li>
+            <li>Your system keeps improving, not staying static</li>
+            <li>One flat monthly rate — no surprise bills</li>
+            <li>A dedicated tech partner as your business grows</li>
+          </ul>
+        </div>
+      </div>
+      <div class="overage-note">
+        <strong>Additional Hours:</strong> Should your needs exceed 5 hours in any given month, additional time is billed at <strong>$60/hour</strong> — always communicated in advance, never a surprise.
+      </div>
+    </div>
+  </div>
+
+  <!-- SCOPE OF WORK -->
+  <div class="sow anim d6">
+    <div class="section-label">Scope of Work</div>
+
+    <div class="sow-week">
+      <div class="sow-week-header">
+        <div class="week-badge">Week 1</div>
+        <div class="week-title">Foundation & Account Setup</div>
+      </div>
+      <div class="sow-week-body">
+        <ul class="sow-tasks">
+          <li>Create and configure your Pipedrive CRM account — custom pipeline stages, fields, and settings tailored to life insurance sales</li>
+          <li>Create and configure your Cal.com account — availability settings, appointment types, and calendar sync</li>
+          <li>Create your Retell AI account and begin platform orientation</li>
+          <li>Initial walkthrough session with Christelle — getting familiar with each tool, what it does, and how they connect</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sow-week">
+      <div class="sow-week-header">
+        <div class="week-badge">Week 2</div>
+        <div class="week-title">AI Caller Build & Scripting</div>
+      </div>
+      <div class="sow-week-body">
+        <ul class="sow-tasks">
+          <li>Write and refine a custom AI call script — tailored to life insurance outreach, FFL positioning, and Christelle's natural communication style</li>
+          <li>Build the AI voice agent inside Retell — configure voice, tone, pacing, and objection handling</li>
+          <li>Connect Retell AI to Cal.com — test the full flow from call to booked appointment</li>
+          <li>Internal testing round: run test calls, review transcripts, adjust script as needed</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sow-week">
+      <div class="sow-week-header">
+        <div class="week-badge">Week 3</div>
+        <div class="week-title">Integration, Lead Flow & Testing</div>
+      </div>
+      <div class="sow-week-body">
+        <ul class="sow-tasks">
+          <li>Connect Retell AI to Pipedrive — booked appointments and call outcomes log automatically</li>
+          <li>Set up phone number provisioning through Retell for outbound calling</li>
+          <li>Configure lead entry workflow in Pipedrive — clean, repeatable process for loading upline leads into the system</li>
+          <li>End-to-end system test: lead enters Pipedrive → AI dials → appointment books on Cal.com → records in CRM</li>
+          <li>Second walkthrough session with Christelle — live demo of the full system working together</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sow-week">
+      <div class="sow-week-header">
+        <div class="week-badge">Week 4</div>
+        <div class="week-title">Launch, Training & Handoff</div>
+      </div>
+      <div class="sow-week-body">
+        <ul class="sow-tasks">
+          <li>Final QA pass — review all integrations, test call quality, verify appointment booking and CRM logging</li>
+          <li>In-person training session: Christelle learns how to load leads, monitor the AI, review call logs, and manage her calendar</li>
+          <li>Deliver a simple one-page quick-reference guide — step-by-step cheat sheet for daily use</li>
+          <li>System goes live — AI begins working leads on Christelle's behalf</li>
+          <li>Monthly retainer begins — ongoing support, tutoring, and optimization</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sow-note">
+      <strong>Lead Import & Data Migration:</strong> The process for importing existing leads from upline management into Pipedrive will be scoped and discussed separately based on the volume, format, and source of those leads. This will be planned collaboratively to ensure a clean, organized pipeline from day one.
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline-section anim d7">
+    <div class="section-label">Project Timeline</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 1</div>
+        <div class="timeline-title">Foundation & Account Setup</div>
+        <div class="timeline-desc">All accounts created and configured. First in-person session to orient Christelle on each platform and what to expect.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 2</div>
+        <div class="timeline-title">AI Caller Build & Scripting</div>
+        <div class="timeline-desc">Custom call script written and loaded. AI voice agent built, tested, and connected to Cal.com for live appointment booking.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 3</div>
+        <div class="timeline-title">Integration, Lead Flow & Testing</div>
+        <div class="timeline-desc">Full system connected end-to-end. Lead entry workflow established. Second walkthrough session with live demo.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot gold"></div>
+        <div class="timeline-week">Week 4 — Go Live</div>
+        <div class="timeline-title">Launch, Training & Handoff</div>
+        <div class="timeline-desc">Final QA, in-person training, quick-reference guide delivered. System goes live. Monthly retainer begins.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVESTMENT SUMMARY -->
+  <div class="investment anim d8">
+    <div class="section-label">Investment Summary</div>
+    <table class="investment-table">
+      <tr>
+        <td>Retell AI Setup <span style="color:var(--muted);font-size:12px;">(incl. Cal.com integration)</span></td>
+        <td>$400</td>
+      </tr>
+      <tr>
+        <td>Pipedrive CRM Setup</td>
+        <td>$200</td>
+      </tr>
+      <tr class="total-row">
+        <td>Total One-Time Investment</td>
+        <td>$600</td>
+      </tr>
+    </table>
+    <div class="payment-note">
+      <strong>Payment Terms:</strong> A deposit of <strong>$360 (60%)</strong> is due upon signing to begin work. The remaining <strong>$240 (40%)</strong> is due upon project completion and system delivery at the end of Week 4. The monthly retainer of <strong>$400/mo</strong> begins the first full month following go-live.
+    </div>
+  </div>
+
+  <!-- MUTUAL AGREEMENT -->
+  <div class="testimonial anim d9">
+    <div class="section-label">Mutual Agreement</div>
+    <div class="testimonial-box">
+      <p>In the spirit of this partnership, NuvelloWeb LLC is offering the above services at a preferred rate in exchange for Christelle Polovin's willingness to provide an honest written testimonial and/or review upon satisfactory completion of the setup phase. This testimonial may be used by NuvelloWeb LLC for portfolio and marketing purposes. There is no obligation to provide a positive review — only an honest one.</p>
+    </div>
+  </div>
+
+  <!-- SIGNATURES -->
+  <div class="signature-section anim d10">
+    <div class="section-label">Agreement & Signatures</div>
+    <p class="sig-intro">By signing below, both parties agree to the services, pricing, scope, and terms outlined in this proposal. This document serves as a binding service agreement upon execution by both parties.</p>
+    <div class="sig-grid">
+      <div>
+        <div class="sig-role">Service Provider</div>
+        <div class="sig-name">Benjamin Krikler</div>
+        <div class="sig-sub">NuvelloWeb LLC</div>
+        <div class="sig-line"></div>
+        <div class="sig-date"></div>
+      </div>
+      <div>
+        <div class="sig-role">Client</div>
+        <div class="sig-name">Christelle Polovin</div>
+        <div class="sig-sub">Independent Insurance Agent, FFL</div>
+        <div class="sig-line"></div>
+        <div class="sig-date"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer anim d11">
+    <div><strong>NuvelloWeb LLC</strong> · Benjamin Krikler</div>
+    <div>
+      <a href="mailto:benjamin@nuvelloweb.com">benjamin@nuvelloweb.com</a> ·
+      <a href="tel:+16465332243">+1 (646) 533-2243</a> ·
+      <a href="https://nuvelloweb.com" target="_blank">nuvelloweb.com</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
