@@ -605,36 +605,45 @@
 
 </div>
 
-<script>
-  function toggle(btn) {
-    const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    // close all
-    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-    // open this one if it was closed
-    if (!isOpen) item.classList.add('open');
-  }
-  // open first item by default
-  document.querySelector('.faq-item').classList.add('open');
-</script>
+
+
 
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const drawer = document.getElementById('navDrawer');
-  const overlay = document.getElementById('navOverlay');
-  function toggleNav() {
-    hamburger.classList.toggle('open');
-    drawer.classList.toggle('open');
-    overlay.classList.toggle('open');
-  }
-  hamburger.addEventListener('click', toggleNav);
-  overlay.addEventListener('click', toggleNav);
-  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    drawer.classList.remove('open');
-    overlay.classList.remove('open');
-  }));
+  document.addEventListener('DOMContentLoaded', function() {
+    var hamburger = document.getElementById('hamburger');
+    var drawer = document.getElementById('navDrawer');
+    var overlay = document.getElementById('navOverlay');
+    if (hamburger && drawer && overlay) {
+      function toggleNav() {
+        hamburger.classList.toggle('open');
+        drawer.classList.toggle('open');
+        overlay.classList.toggle('open');
+      }
+      hamburger.addEventListener('click', toggleNav);
+      overlay.addEventListener('click', toggleNav);
+      var links = drawer.querySelectorAll('a');
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function() {
+          hamburger.classList.remove('open');
+          drawer.classList.remove('open');
+          overlay.classList.remove('open');
+        });
+      }
+    }
+    // FAQ accordion
+    function toggle(btn) {
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    }
+    var firstItem = document.querySelector('.faq-item');
+    if (firstItem) firstItem.classList.add('open');
+    var btns = document.querySelectorAll('.faq-btn');
+    for (var j = 0; j < btns.length; j++) {
+      btns[j].addEventListener('click', function() { toggle(this); });
+    }
+  });
 </script>
-
 </body>
 </html>

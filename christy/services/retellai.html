@@ -416,7 +416,18 @@
     <a href="pipedrive.html">Pipedrive</a>
     <a href="../faq.html">FAQ</a>
   </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+  <a href="../index.html">Proposal</a>
+  <a href="retellai.html" class="active">Retell AI</a>
+  <a href="calcom.html">Cal.com</a>
+  <a href="pipedrive.html">Pipedrive</a>
+  <a href="../faq.html">FAQ</a>
+</div>
 
 
 <!-- FLOATING CTA -->
@@ -579,5 +590,29 @@
   </div>
 
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var hamburger = document.getElementById('hamburger');
+    var drawer = document.getElementById('navDrawer');
+    var overlay = document.getElementById('navOverlay');
+    if (!hamburger || !drawer || !overlay) return;
+    function toggleNav() {
+      hamburger.classList.toggle('open');
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
+    hamburger.addEventListener('click', toggleNav);
+    overlay.addEventListener('click', toggleNav);
+    var links = drawer.querySelectorAll('a');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('click', function() {
+        hamburger.classList.remove('open');
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+    }
+  });
+</script>
 </body>
 </html>
